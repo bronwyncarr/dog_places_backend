@@ -1,0 +1,52 @@
+### Index method
+
+GET http://localhost:3000/api/locations
+
+### succesfully posts a location 
+
+
+POST http://localhost:3000/api/locations
+Content-Type: application/json
+
+{
+    "user_id": 2,
+    "location_type_id":3,
+    "name":"testarooni",
+    "address": "123 fakestreet" ,
+    "rating": 4
+}
+
+### unseccesfull request
+
+POST http://localhost:3000/api/locations
+Content-Type: application/json
+
+{
+    "location_type_id":3,
+    "name":"testarooni",
+    "address": "123 fakestreet" ,
+    "rating": 4
+}
+
+### show location id 1
+GET http://localhost:3000/api/locations/1
+
+### unsuccessful location show
+GET http://localhost:3000/api/locations/100
+
+
+### succesfull location update
+PUT http://localhost:3000/api/locations/1
+Content-Type: application/json
+
+{
+    "name":"KCC Dog park"
+}
+
+### Delete method works
+
+DELETE http://localhost:3000/api/locations/1
+
+### Delete method wont delete if the location doesnt exist
+
+DELETE http://localhost:3000/api/locations/1000

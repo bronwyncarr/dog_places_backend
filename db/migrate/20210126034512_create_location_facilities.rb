@@ -1,4 +1,4 @@
-class LocationFacility < ActiveRecord::Migration[6.1]
+class CreateLocationFacilities < ActiveRecord::Migration[6.1]
   def change
     create_table :location_facility do |t|
     t.references :location, null: false, foreign_key: true

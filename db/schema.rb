@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_000013) do
+ActiveRecord::Schema.define(version: 2021_01_26_034512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,18 @@ ActiveRecord::Schema.define(version: 2021_01_21_000013) do
   end
 
   create_table "facilities", force: :cascade do |t|
-    t.string "type"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.bigint "location_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["location_id"], name: "index_facilities_on_location_id"
+    t.index ["location_id"], name: "index_favorites_on_location_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "location_facility", force: :cascade do |t|
@@ -40,22 +47,24 @@ ActiveRecord::Schema.define(version: 2021_01_21_000013) do
     t.index ["location_id"], name: "index_location_facility_on_location_id"
   end
 
+  create_table "location_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "location_type_id", null: false
     t.string "name"
-    t.string "type"
-    t.string "longitude"
-    t.string "latitude"
+    t.string "address"
+    t.float "longitude"
+    t.float "latitude"
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_type_id"], name: "index_locations_on_location_type_id"
     t.index ["user_id"], name: "index_locations_on_user_id"
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string "type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,8 +77,10 @@ ActiveRecord::Schema.define(version: 2021_01_21_000013) do
 
   add_foreign_key "comments", "locations"
   add_foreign_key "comments", "users"
-  add_foreign_key "facilities", "locations"
+  add_foreign_key "favorites", "locations"
+  add_foreign_key "favorites", "users"
   add_foreign_key "location_facility", "facilities"
   add_foreign_key "location_facility", "locations"
+  add_foreign_key "locations", "location_types"
   add_foreign_key "locations", "users"
 end
