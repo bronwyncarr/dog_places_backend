@@ -5,10 +5,11 @@ class CreateLocations < ActiveRecord::Migration[6.1]
 
 
       t.string :name
-      t.string :type
+      t.string :category
+      t.string :description
       t.string :longitude
       t.string :latitude
-      t.integer :rating
+      t.integer :overall_rating
 
       t.timestamps
     end
