@@ -4,4 +4,7 @@ class Location < ApplicationRecord
 
   has_many :comments
   #has_many :facilities through :location_facilities
+
+  geocoded_by :address
+  after_validation :geocode
 end

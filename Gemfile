@@ -42,3 +42,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "knock", "~> 2.1"
 
 gem "jwt", "~> 1.5"
+
+gem "geocoder", "~> 1.6"

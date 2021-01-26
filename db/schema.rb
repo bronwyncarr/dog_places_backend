@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 2021_01_26_034512) do
     t.bigint "location_type_id", null: false
     t.string "name"
     t.string "address"
-    t.string "longitude"
-    t.string "latitude"
+    t.float "longitude"
+    t.float "latitude"
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
