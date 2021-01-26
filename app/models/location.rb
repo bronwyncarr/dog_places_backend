@@ -1,4 +1,5 @@
 class Location < ApplicationRecord
+  belongs_to :user
   has_many :comments
-  has_many :location_facilities
+  has_many :acilities
 end
