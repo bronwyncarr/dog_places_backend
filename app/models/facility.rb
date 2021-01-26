@@ -1,3 +1,3 @@
 class Facility < ApplicationRecord
-  has many :locations
+  has_many :locations
 end
