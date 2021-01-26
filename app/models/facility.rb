@@ -1,3 +1,3 @@
 class Facility < ApplicationRecord
-  belongs_to :location_facility
+  has_many :locations
 end
