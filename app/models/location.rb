@@ -8,5 +8,9 @@ class Location < ApplicationRecord
   
   # Allows many facilities to be listed for each location
   has_many :location_facilities, dependent: :destroy
-  has_many :locations through: :location_facilities
+  has_many :facilities, through: :location_facilities
+
+  # Allows users to select favourites
+  has_many :favourites, dependent: :destroy
+  has_many :users, through: :favourites
 end
