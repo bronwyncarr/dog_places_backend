@@ -1,10 +1,16 @@
 class Location < ApplicationRecord
-  belongs_to :user
-  belongs_to :location_type
+  # Validations
+  validates :name, :category, presence: true
+  validates :description, length: { maximum: 5000 }
 
-  has_many :comments
-  #has_many :facilities through :location_facilities
+  # Relationships
+  has_many :comments, dependent: :destroy
+  
+  # Allows many facilities to be listed for each location
+  has_many :location_facilities, dependent: :destroy
+  has_many :facilities, through: :location_facilities
 
-  geocoded_by :address
-  after_validation :geocode
+  # Allows users to select favourites
+  has_many :favourites, dependent: :destroy
+  has_many :users, through: :favourites
 end

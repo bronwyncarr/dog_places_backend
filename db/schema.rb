@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_034512) do
+ActiveRecord::Schema.define(version: 2021_01_26_231145) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_01_26_034512) do
     t.bigint "user_id", null: false
     t.bigint "location_id", null: false
     t.string "body"
+    t.string "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["location_id"], name: "index_comments_on_location_id"
@@ -40,17 +42,22 @@ ActiveRecord::Schema.define(version: 2021_01_26_034512) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
-  create_table "location_facility", force: :cascade do |t|
+  create_table "favourites", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.bigint "location_id", null: false
-    t.bigint "facility_id", null: false
-    t.index ["facility_id"], name: "index_location_facility_on_facility_id"
-    t.index ["location_id"], name: "index_location_facility_on_location_id"
-  end
-
-  create_table "location_types", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_favourites_on_location_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
+  create_table "location_facilities", force: :cascade do |t|
+    t.bigint "facility_id", null: false
+    t.bigint "location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["facility_id"], name: "index_location_facilities_on_facility_id"
+    t.index ["location_id"], name: "index_location_facilities_on_location_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -60,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_01_26_034512) do
     t.string "address"
     t.float "longitude"
     t.float "latitude"
-    t.integer "rating"
+    t.integer "overall_rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["location_type_id"], name: "index_locations_on_location_type_id"
@@ -68,7 +75,7 @@ ActiveRecord::Schema.define(version: 2021_01_26_034512) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "username"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
@@ -77,10 +84,8 @@ ActiveRecord::Schema.define(version: 2021_01_26_034512) do
 
   add_foreign_key "comments", "locations"
   add_foreign_key "comments", "users"
-  add_foreign_key "favorites", "locations"
-  add_foreign_key "favorites", "users"
-  add_foreign_key "location_facility", "facilities"
-  add_foreign_key "location_facility", "locations"
-  add_foreign_key "locations", "location_types"
-  add_foreign_key "locations", "users"
+  add_foreign_key "favourites", "locations"
+  add_foreign_key "favourites", "users"
+  add_foreign_key "location_facilities", "facilities"
+  add_foreign_key "location_facilities", "locations"
 end
