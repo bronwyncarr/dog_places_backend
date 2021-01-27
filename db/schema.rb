@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2021_01_26_231145) do
 
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,15 +32,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_231145) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "favorites", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "location_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["location_id"], name: "index_favorites_on_location_id"
-    t.index ["user_id"], name: "index_favorites_on_user_id"
-  end
-
   create_table "favourites", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "location_id", null: false
@@ -60,13 +50,20 @@ ActiveRecord::Schema.define(version: 2021_01_26_231145) do
     t.index ["location_id"], name: "index_location_facilities_on_location_id"
   end
 
+  create_table "location_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "location_type_id", null: false
     t.string "name"
-    t.string "address"
-    t.float "longitude"
-    t.float "latitude"
+    t.string "category"
+    t.string "description"
+    t.string "longitude"
+    t.string "latitude"
     t.integer "overall_rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -88,4 +85,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_231145) do
   add_foreign_key "favourites", "users"
   add_foreign_key "location_facilities", "facilities"
   add_foreign_key "location_facilities", "locations"
+  add_foreign_key "locations", "location_types"
+  add_foreign_key "locations", "users"
 end
