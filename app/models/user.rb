@@ -1,6 +1,8 @@
 class User < ApplicationRecord
+  # Authentication
+  has_secure_password
   # Validations
-  validates :username, :email, presence: true
+  validates :username, :email, presence: true, uniqueness: true
   
   # Relationships
   has_many :comments, dependent: :destroy

@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  before_action :authenticate_user, except:[:index]
   before_action :set_location, only: [:show,:update,:destroy]
   def index
     @locations = Location.all
@@ -6,7 +7,7 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location =Location.create(location_params)
+    @location =current_user.locations.create(location_params)
     if @location.errors.any?
       render json: @location.errors, status: :unprocessable_entity
     else
