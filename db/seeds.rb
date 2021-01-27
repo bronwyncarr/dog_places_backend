@@ -2,6 +2,8 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 
+new_users = [{ name: 'steve', email: 'steve@s.com', password: '123456' },
+  { name: 'Jess', email: 'Jessica@j.com', password: 'Password' }]
 location_facilities = ['Toilets', 'Food', 'Parking', 'Water', 'Off Lead']
 
 location_types = ['Dog park', 'Park', 'Beach', 'Dog Cafe']
