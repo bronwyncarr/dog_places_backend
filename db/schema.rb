@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_231145) do
     t.bigint "user_id", null: false
     t.bigint "location_type_id", null: false
     t.string "name"
-    t.string "category"
     t.string "description"
     t.string "longitude"
     t.string "latitude"
