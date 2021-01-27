@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user, except:[:index]
   before_action :set_location, only: [:show,:update,:destroy]
+  before_action :is_owner?,only:[:update,:destroy]
   def index
     @locations = Location.all
     render json: @locations
@@ -50,5 +51,10 @@ class LocationsController < ApplicationController
     rescue 
       render json: {error: "Location not found"}, status: 404
     end
+  end
+  def is_owner?
+  if current_user.id != @location.id
+    render json:{error: 'you have no power here (this isnt yours so you cant dowhatever you just tried)'},status: 401 
+  end
   end
 end
