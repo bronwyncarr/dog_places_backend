@@ -60,11 +60,12 @@ ActiveRecord::Schema.define(version: 2021_01_26_231145) do
     t.bigint "user_id", null: false
     t.bigint "location_type_id", null: false
     t.string "name"
+    t.string "address"
     t.string "category"
     t.string "description"
     t.string "longitude"
     t.string "latitude"
-    t.integer "overall_rating"
+    t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["location_type_id"], name: "index_locations_on_location_type_id"

@@ -5,11 +5,12 @@ class CreateLocations < ActiveRecord::Migration[6.1]
       t.references :location_type, null: false, foreign_key: true, optional: false
 
       t.string :name
+      t.string :address
       t.string :category
       t.string :description
       t.string :longitude
       t.string :latitude
-      t.integer :overall_rating
+      t.integer :rating
 
       t.timestamps
     end

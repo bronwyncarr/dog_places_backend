@@ -12,7 +12,7 @@ location_facilities = ['Toilets', 'Food', 'Parking', 'Water', 'Off Lead']
 location_types = ['Dog park', 'Park', 'Beach', 'Dog Cafe']
 
 new_users.each do |user|
-  User.create(name: user[:name], email: user[:email], password_digest: user[:password])
+  User.create(username: user[:name], email: user[:email], password_digest: user[:password])
   puts "Created #{user[:name]} User"
 end
 
@@ -28,4 +28,4 @@ end
 
 #Location.create(user:User.first,facility:Facility.first,location_type:LocationType.first,name:'test dog park',address:'655 Westernport Hwy',latitude:'-38.155520',longitude:'145.224080')
 
-Location.create(user:User.first,location_type:LocationType.first,name:'test dog park',address:'655 Westernport Hwy',rating:4)
+Location.create(user_id:User.first,location_type_id:LocationType.first,name:'test dog park',address:'655 Westernport Hwy',rating:4)
