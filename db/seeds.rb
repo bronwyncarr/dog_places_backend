@@ -6,6 +6,7 @@ new_users = [{ username: 'steve', email: 'a@test.com', password: '123456' },
              { username: 'Jess', email: 'b@test.com', password: '123456' }]
 
 new_users.each do |user|
+
   User.create(username: user[:username], email: user[:email], password_digest: user[:password])
   puts "Created #{user[:name]} User"
 end
@@ -29,6 +30,7 @@ facilities.each do |fac|
   Facility.create(name: fac)
   puts "Created #{fac} facility"
 end
+
 
 LocationFacility.create(facility_id: 1, location_id: 1)
 LocationFacility.create(facility_id: 2, location_id: 1)
