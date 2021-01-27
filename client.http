@@ -14,7 +14,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTE4MTI2N
     "location_type_id":3,
     "name":"testarooni",
     "address": "123 fakestreet" ,
-    "rating": 4
+    "description":"A fun dogpark for all to come and play!"
 }
 
 ### unseccesfull request
