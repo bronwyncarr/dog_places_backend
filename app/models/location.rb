@@ -21,6 +21,11 @@ class Location < ApplicationRecord
   has_many :favourites, dependent: :destroy
   has_many :users, through: :favourites
 
+  # nested location facilities config
+  accepts_nested_attributes_for :location_facilities, allow_destroy: true, reject_if: lambda{|attr|attr['name'].blank?}
+
+
+#Makes the JSON request easier to work with on the React side
   def transform_json
     return{
       user: user.username,
