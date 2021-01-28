@@ -7,13 +7,14 @@ GET http://localhost:3000/api/locations
 
 POST http://localhost:3000/api/locations
 Content-Type: application/json
+# Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTE4MjM5MTgsInN1YiI6M30.slDfpj8anvsFa92kwJ1jsg7Wu53kHZHIsPuCI3WcCr8
 
 {
-    "user_id": 2,
+    "user_id": 3,
     "location_type_id":3,
     "name":"testarooni",
     "address": "123 fakestreet" ,
-    "rating": 4
+    "description":"A fun dogpark for all to come and play!"
 }
 
 ### unseccesfull request
@@ -36,17 +37,71 @@ GET http://localhost:3000/api/locations/100
 
 
 ### succesfull location update
-PUT http://localhost:3000/api/locations/1
+PUT http://localhost:3000/api/locations/3
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTE4MjQ1NzIsInN1YiI6M30.hm4d5Wq8ZqPYYIhVwT3VTzSFsUSkf8CktxjxdULmag4
 
 {
+    "location":{
     "name":"KCC Dog park"
+}
+ 
 }
 
 ### Delete method works
 
-DELETE http://localhost:3000/api/locations/1
+DELETE http://localhost:3000/api/locations/3
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTE4MjQ1NzIsInN1YiI6M30.hm4d5Wq8ZqPYYIhVwT3VTzSFsUSkf8CktxjxdULmag4
 
 ### Delete method wont delete if the location doesnt exist
 
 DELETE http://localhost:3000/api/locations/1000
+
+
+####################################################
+########### Begin User tests########################
+####################################################
+
+### Create User run twice to check validations
+
+POST http://localhost:3000/api/auth/sign_up
+Content-Type: application/json
+
+{
+"user":
+{
+    "username":"testyboi",
+    "email":"test@me.com",
+    "password":"testme",
+    "password_confirmation":"testme"
+    
+}
+
+}
+
+### Check user can sign in after sign up
+POST http://localhost:3000/api/auth/sign_in
+Content-Type: application/json
+
+{
+"user":
+{
+    "email":"test@me.com",
+    "password":"testme"
+    
+}
+}
+
+
+### Check user can't sign in with incorect details
+POST http://localhost:3000/api/auth/sign_in
+Content-Type: application/json
+
+{
+"user":
+{
+    "email":"test@me.com",
+    "password":"testme2"
+    
+}
+}

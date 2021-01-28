@@ -7,5 +7,10 @@ Rails.application.routes.draw do
     put '/locations/:id', to: 'locations#update'
     delete '/locations/:id', to: 'locations#destroy'
     get '/locations/nearme', to: 'locations#nearme'
+    scope '/auth' do
+      post 'user_token' => 'user_token#create'
+    post '/sign_up', to: 'users#create'
+    post '/sign_in',to: 'users#sign_in'
+    end
   end
 end
