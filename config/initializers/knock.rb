@@ -1,5 +1,13 @@
 Knock.setup do |config|
 
+  config.token_signature_algorithm = 'HS256'
+  config.token_secret_signature_key = -> { Rails.application.credentials.secret_key_base }
+  config.token_public_key = nil
+  config.token_audience = nil
+  config.token_lifetime = 1.day
+
+  config.not_found_exception_class_name = 'ActiveRecord::RecordNotFound'
+
   ## Expiration claim
   ## ----------------
   ##
@@ -37,7 +45,7 @@ Knock.setup do |config|
   ##
   ## Default:
   # config.token_secret_signature_key = -> { Rails.application.secrets.secret_key_base }
- config.token_secret_signature_key = -> { Rails.application.credentials.secret_key_base }
+ 
   ## If using Auth0, uncomment the line below
   # config.token_secret_signature_key = -> { JWT.base64url_decode Rails.application.secrets.auth0_client_secret }
 

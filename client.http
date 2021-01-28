@@ -7,7 +7,7 @@ GET http://localhost:3000/api/locations
 
 POST http://localhost:3000/api/locations
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTE4MjM5MTgsInN1YiI6M30.slDfpj8anvsFa92kwJ1jsg7Wu53kHZHIsPuCI3WcCr8
+# Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTE4MjM5MTgsInN1YiI6M30.slDfpj8anvsFa92kwJ1jsg7Wu53kHZHIsPuCI3WcCr8
 
 {
     "user_id": 3,
@@ -93,7 +93,7 @@ Content-Type: application/json
 }
 
 
-### Check user can't sing in with incorect details
+### Check user can't sign in with incorect details
 POST http://localhost:3000/api/auth/sign_in
 Content-Type: application/json
 
