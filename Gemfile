@@ -48,3 +48,5 @@ gem "jwt", "~> 1.5"
 
 ## Geocoding gem
 gem "geocoder", "~> 1.6"
+
+gem "sendgrid-ruby", "~> 6.3"

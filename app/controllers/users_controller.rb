@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
   def create
+    # create user from user params
     @user = User.create(user_params)
     
-    pp params
+    
     if @user.save
+       # Deliver the signup email
+       UserNotifierMailer.send_signup_email(@user).deliver
       auth_token = Knock::AuthToken.new payload: { sub: @user.id }
       render json: { username: @user.username, jwt: auth_token.token }, status: :created
       

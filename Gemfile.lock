@@ -161,6 +161,9 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.1)
+    ruby_http_client (3.5.2)
+    sendgrid-ruby (6.3.9)
+      ruby_http_client (~> 3.4)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -194,6 +197,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.1.1)
   rspec-rails
+  sendgrid-ruby (~> 6.3)
   spring
   tzinfo-data
 
