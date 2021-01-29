@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       render json: { username: @user.username, jwt: auth_token.token }, status: :created
       
     else
-      byebug
+      
       render json: @user.errors, status: :unprocessable_entity
     end
   end

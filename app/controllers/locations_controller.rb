@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  before_action :authenticate_user, except: [:index]
+  before_action :authenticate_user, except: [:index,:show]
   before_action :set_location, only: %i[show update destroy]
   before_action :owner?, only: %i[update destroy]
   def index
@@ -41,7 +41,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:user_id, :location_type_id, :name, :address, :description,:location_facilities[:id,:name])
+    params.require(:location).permit(:user_id, :location_type_id, :name, :address, :description,:location_facilities[:id,:name],:id)
   end
 
   def set_location

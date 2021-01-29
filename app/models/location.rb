@@ -28,6 +28,7 @@ class Location < ApplicationRecord
 #Makes the JSON request easier to work with on the React side
   def transform_json
     return{
+      id:self.id,
       user: user.username,
       location_type: location_type.name,
       name: name,
