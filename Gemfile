@@ -14,7 +14,7 @@ gem 'puma', '~> 5.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.13'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -49,4 +49,5 @@ gem "jwt", "~> 1.5"
 ## Geocoding gem
 gem "geocoder", "~> 1.6"
 
+## Sendgrid mailer gem 
 gem "sendgrid-ruby", "~> 6.3"
