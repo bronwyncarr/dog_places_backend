@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show update destroy]
   before_action :owner?, only: %i[update destroy]
   def index
-    @locations = Location.all
+    @locations = Location.all.includes([:location_type,:user])
     render json: @locations.map(&:transform_json)
     
   end

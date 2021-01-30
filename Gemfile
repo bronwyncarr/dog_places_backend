@@ -51,3 +51,5 @@ gem "geocoder", "~> 1.6"
 
 ## Sendgrid mailer gem 
 gem "sendgrid-ruby", "~> 6.3"
+
+gem "bullet", "~> 6.1"
