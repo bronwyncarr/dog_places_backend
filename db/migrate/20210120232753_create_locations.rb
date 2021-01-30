@@ -8,8 +8,8 @@ class CreateLocations < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :address
       t.text :description
-      t.integer :longitude
-      t.integer :latitude
+      t.float :longitude
+      t.float :latitude
       
 
       t.timestamps

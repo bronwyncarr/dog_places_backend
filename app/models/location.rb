@@ -40,4 +40,9 @@ class Location < ApplicationRecord
       edited: updated_at
     }
   end
+
+  #Favorites integration
+  def favorite?(user)
+    !!self.favourites.find{|favorite| favorite.user_id == user.id}
+  end
 end

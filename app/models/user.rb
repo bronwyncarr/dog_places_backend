@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_secure_password
   # Validations
   validates :username, :email, presence: true, uniqueness: true
-  
+
   # Relationships
   has_many :reviews, dependent: :destroy
 
