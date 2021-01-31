@@ -22,13 +22,14 @@ class Location < ApplicationRecord
   has_many :users, through: :favourites
 
   # nested location facilities config
-  accepts_nested_attributes_for :location_facilities, allow_destroy: true, reject_if: lambda{|attr|attr['name'].blank?}
+  accepts_nested_attributes_for :location_facilities, allow_destroy: true, reject_if: lambda { |attr|
+                                                                                        attr['name'].blank?
+                                                                                      }
 
-
-#Makes the JSON request easier to work with on the React side
+  # Makes the JSON request easier to work with on the React side
   def transform_json
-    return{
-      id:self.id,
+    {
+      id: id,
       user: user.username,
       location_type: location_type.name,
       name: name,
@@ -37,12 +38,13 @@ class Location < ApplicationRecord
       longitude: longitude,
       latitude: latitude,
       posted: created_at,
-      edited: updated_at
+      edited: updated_at,
+      reviews: self.reviews
     }
   end
 
-  #Favorites integration
+  # Favorites integration
   def favorite?(user)
-    !!self.favourites.find{|favorite| favorite.user_id == user.id}
+    !!favourites.find { |favorite| favorite.user_id == user.id }
   end
 end

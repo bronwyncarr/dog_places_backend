@@ -43,12 +43,12 @@ class LocationsController < ApplicationController
 
   def favourite
     type = params[:favourite]
-    if type == "like"
+    if type == 'like'
       current_user.favourites.create(location: @location)
-       render json: {notice: 'Location added to favorites!'}, status: 200
+      render json: { notice: 'Location added to favorites!' }, status: 200
     elsif type == 'unlike'
       current_user.favourites.delete_by(location: @location)
-      render json:{ notice: 'Location was removed from favorites' }, status: 201
+      render json: { notice: 'Location was removed from favorites' }, status: 201
     end
   end
 

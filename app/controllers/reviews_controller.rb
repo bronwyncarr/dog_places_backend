@@ -8,13 +8,17 @@ before_action :authenticate_user!, except: [:index]
   end
 
   def create
-    @review = @recipe.reviews.new(review_params)
+    @review = @location.reviews.new(review_params)
     @review.user_id = current_user.id
     @review.save
   end
+  def destroy
+    @review.delete
+
+    render json: {notice: 'review was deleted'}, status: 204
+  end
 
   private
- #determines the recipe to attach the coment to
   def find_location!
     @review = Location.find(params[:location_id])
   end
