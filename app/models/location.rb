@@ -25,6 +25,14 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :location_facilities, allow_destroy: true, reject_if: lambda { |attr|
                                                                                         attr['name'].blank?
                                                                                       }
+def get_facilities(location)
+  facilities = []
+  location.location_facilities.each do |fac|
+    facilities << fac.facility.name
+  end
+  facilities
+end
+
 
   # Makes the JSON request easier to work with on the React side
   def transform_json
@@ -39,7 +47,8 @@ class Location < ApplicationRecord
       latitude: latitude,
       posted: created_at,
       edited: updated_at,
-      reviews: self.reviews
+      reviews: self.reviews,
+      facilities:get_facilities(self)
     }
   end
 

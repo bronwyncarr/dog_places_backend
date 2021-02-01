@@ -10,7 +10,7 @@ location_types = ['Dog park', 'Park', 'Beach', 'Dog Cafe']
 
 if User.count == 0
   new_users.each do |user|
-    User.create(username: user[:name], email: user[:email], password_digest: user[:password])
+    User.create(username: user[:name], email: user[:email], password: user[:password], password_confirmation: user[:password])
     puts "Created #{user[:name]} User"
   end
 else
@@ -43,3 +43,5 @@ Favourite.create(user_id: 2, location_id: 1)
 
 LocationFacility.create(facility_id: 1, location_id: 1)
 LocationFacility.create(facility_id: 2, location_id: 1)
+Review.create(location_id:1,user_id:2, body:"testing this out",rating:4)
+Review.create(location_id:2,user_id:1, body:"testing this out againn",rating:2)
