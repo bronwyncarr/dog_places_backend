@@ -8,9 +8,12 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = current_user.locations.create(params[:location])
-
+   
+    @location = Location.new(location_params)
+    @location.user_id = current_user.id
+    @location.save
     if @location.errors.any?
+      byebug
 
       render json: @location.errors, status: :unprocessable_entity
     else
@@ -55,7 +58,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:user_id, :location_type_id, :name, :address, :description, :id,
+    params.require(:location).permit( :location_type_id, :name, :address, :description,
                                      location_facilities_attributes: %i[id name])
   end
 
