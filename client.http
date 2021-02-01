@@ -105,3 +105,7 @@ Content-Type: application/json
     
 }
 }
+
+###testing location data method
+GET  http://localhost:3000/api/locations/static_assests
+Content-Type: application/json

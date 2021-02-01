@@ -1,6 +1,7 @@
-class ReviewsController < ApplicationController
+# frozen_string_literal: true
 
-before_action :authenticate_user!, except: [:index]
+class ReviewsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   before_action :find_location!
 
   def index
@@ -12,13 +13,15 @@ before_action :authenticate_user!, except: [:index]
     @review.user_id = current_user.id
     @review.save
   end
+
   def destroy
     @review.delete
 
-    render json: {notice: 'review was deleted'}, status: 204
+    render json: { notice: 'review was deleted' }, status: 204
   end
 
   private
+
   def find_location!
     @review = Location.find(params[:location_id])
   end

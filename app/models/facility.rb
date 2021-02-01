@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Facility < ApplicationRecord
-   # Validations
-   validates :name, presence: true
+  # Validations
+  validates :name, presence: true
 
   # Allows many facilities to be listed for each location
   has_many :location_facilities, dependent: :destroy
