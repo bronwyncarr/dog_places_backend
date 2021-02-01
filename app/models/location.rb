@@ -27,7 +27,8 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :location_facilities, allow_destroy: true, reject_if: lambda { |attr|
                                                                                         attr['name'].blank?
                                                                                       }
-                                                                                      # the cleanest way i could thnk of to get the names for facilities from the join table
+                                                                                     
+  # the cleanest way i could thnk of to get the names for facilities from the join table
   def get_facilities(location)
     facilities = []
     location.location_facilities.each do |fac|
