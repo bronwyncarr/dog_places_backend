@@ -3,7 +3,7 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user, except: [:index,:get_static_assests]
   before_action :set_location, only: %i[show update destroy]
-  before_action :owner?, only: %i[update destroy]
+  # before_action :owner?, only: %i[update destroy]
   def index
     @locations = Location.all.includes(%i[location_type user])
     render json: @locations.map(&:transform_json)
@@ -15,7 +15,6 @@ class LocationsController < ApplicationController
     @location.user_id = current_user.id
     @location.save
     if @location.errors.any?
-
       render json: @location.errors, status: :unprocessable_entity
     else
 
@@ -29,7 +28,6 @@ class LocationsController < ApplicationController
   end
 
   def update
-    
     @location.update(location_params)
     if @location.errors.any?
       render json: @location.errors, status: :unprocessable_entity
