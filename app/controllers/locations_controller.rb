@@ -13,13 +13,16 @@ class LocationsController < ApplicationController
     
     @location = Location.new(location_params)
     @location.user_id = current_user.id
+    @location.location_type = LocationType.find_by_name(params[:location_type_name])
     @location.save
+
     if @location.errors.any?
 
       render json: @location.errors, status: :unprocessable_entity
     else
-
-      puts @location.errors.messages
+      params[:location_facilities_attributes].each do |facility|
+        LocationFacility.create(location_id:@location.id,facility:Facility.find_by_name(facility))
+      end
       render json: @location.transform_json, status: 201
     end
   end
@@ -76,8 +79,8 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:location_type_id, :name, :address, :description,
-                                     location_facilities_attributes: %i[id name])
+    params.require(:location).permit(:location_type_name, :name, :address, :description,
+                                     location_facilities_attributes: [:name])
   end
 
   def set_location
