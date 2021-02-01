@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
-  before_action :authenticate_user, except: [:index]
+  before_action :authenticate_user, except: [:index,:get_static_assests]
   before_action :set_location, only: %i[show update destroy]
   before_action :owner?, only: %i[update destroy]
   def index
@@ -10,11 +10,11 @@ class LocationsController < ApplicationController
   end
 
   def create
+    
     @location = Location.new(location_params)
     @location.user_id = current_user.id
     @location.save
     if @location.errors.any?
-      byebug
 
       render json: @location.errors, status: :unprocessable_entity
     else
@@ -29,7 +29,7 @@ class LocationsController < ApplicationController
   end
 
   def update
-    byebug
+    
     @location.update(location_params)
     if @location.errors.any?
       render json: @location.errors, status: :unprocessable_entity
@@ -58,6 +58,21 @@ class LocationsController < ApplicationController
     end
   end
 
+  def get_static_assests
+    types = LocationType.all
+    facilities = Facility.all
+    type_array = []
+    facility_array = []
+      types.each do |type|
+        type_array <<type.name
+      end
+      facilities.each do |facility|
+       facility_array << facility.name
+      end
+      
+    render json:{location_types:type_array,location_facilities:facility_array}
+    end
+
   private
 
   def location_params
@@ -77,4 +92,5 @@ class LocationsController < ApplicationController
              status: 401
     end
   end
+  
 end

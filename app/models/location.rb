@@ -27,6 +27,7 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :location_facilities, allow_destroy: true, reject_if: lambda { |attr|
                                                                                         attr['name'].blank?
                                                                                       }
+                                                                                      # the cleanest way i could thnk of to get the names for facilities from the join table
   def get_facilities(location)
     facilities = []
     location.location_facilities.each do |fac|
@@ -35,7 +36,7 @@ class Location < ApplicationRecord
     facilities
   end
 
-  # Makes the JSON request easier to work with on the React side
+  # Makes the JSON request easier to work with on the React side thisis called on the Location object before transmitting it to extract details relating to the location so instead of say having user come through as an niteger it comes through with the string 
   def transform_json
     {
       id: id,
@@ -57,4 +58,7 @@ class Location < ApplicationRecord
   def favorite?(user)
     !!favourites.find { |favorite| favorite.user_id == user.id }
   end
+
+  
+
 end

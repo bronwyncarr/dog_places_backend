@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   scope '/api' do
     get '/locations', to: 'locations#index'
     post '/locations', to: 'locations#create'
+    get '/locations/static_assests', to: 'locations#get_static_assests'
     get '/locations/:id', to: 'locations#show'
     put '/locations/:id', to: 'locations#update'
     delete '/locations/:id', to: 'locations#destroy'
     get '/locations/nearme', to: 'locations#nearme'
-
     scope '/auth' do
       post 'user_token' => 'user_token#create'
       post '/sign_up', to: 'users#create'
