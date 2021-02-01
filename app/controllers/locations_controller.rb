@@ -28,7 +28,8 @@ class LocationsController < ApplicationController
   end
 
   def update
-    @location.update(params)
+    byebug
+    @location.update(location_params)
     if @location.errors.any?
       render json: @location.errors, status: :unprocessable_entity
     else
