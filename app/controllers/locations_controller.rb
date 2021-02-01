@@ -8,9 +8,12 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = current_user.locations.create(params[:location])
-
+   
+    @location = Location.new(location_params)
+    @location.user_id = current_user.id
+    @location.save
     if @location.errors.any?
+      byebug
 
       render json: @location.errors, status: :unprocessable_entity
     else
@@ -43,19 +46,19 @@ class LocationsController < ApplicationController
 
   def favourite
     type = params[:favourite]
-    if type == "like"
+    if type == 'like'
       current_user.favourites.create(location: @location)
-       render json: {notice: 'Location added to favorites!'}, status: 200
+      render json: { notice: 'Location added to favorites!' }, status: 200
     elsif type == 'unlike'
       current_user.favourites.delete_by(location: @location)
-      render json:{ notice: 'Location was removed from favorites' }, status: 201
+      render json: { notice: 'Location was removed from favorites' }, status: 201
     end
   end
 
   private
 
   def location_params
-    params.require(:location).permit(:user_id, :location_type_id, :name, :address, :description, :id,
+    params.require(:location).permit( :location_type_id, :name, :address, :description,
                                      location_facilities_attributes: %i[id name])
   end
 

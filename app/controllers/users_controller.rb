@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   end
 
   def sign_in
-    @user = User.find_by_email(params[:user][:username])
+    
+    @user = User.find_by_username(params[:user][:username])
     # #checks there is a user and that they have entered the right password based on bcrypts encryption.
 
     if @user && @user.authenticate(params[:user][:password])
