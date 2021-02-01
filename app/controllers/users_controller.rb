@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def create
     # create user from user params
@@ -16,11 +18,10 @@ class UsersController < ApplicationController
   end
 
   def sign_in
-    
     @user = User.find_by_username(params[:user][:username])
     # #checks there is a user and that they have entered the right password based on bcrypts encryption.
 
-    if @user && @user.authenticate(params[:user][:password])
+    if @user&.authenticate(params[:user][:password])
       auth_token = Knock::AuthToken.new payload: { sub: @user.id }
       render json: { username: @user.username, jwt: auth_token.token }, status: 200
     else

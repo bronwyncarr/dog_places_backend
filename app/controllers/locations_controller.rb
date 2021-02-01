@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocationsController < ApplicationController
   before_action :authenticate_user, except: [:index]
   before_action :set_location, only: %i[show update destroy]
@@ -8,7 +10,6 @@ class LocationsController < ApplicationController
   end
 
   def create
-   
     @location = Location.new(location_params)
     @location.user_id = current_user.id
     @location.save
@@ -47,10 +48,11 @@ class LocationsController < ApplicationController
 
   def favourite
     type = params[:favourite]
-    if type == 'like'
+    case type
+    when 'like'
       current_user.favourites.create(location: @location)
       render json: { notice: 'Location added to favorites!' }, status: 200
-    elsif type == 'unlike'
+    when 'unlike'
       current_user.favourites.delete_by(location: @location)
       render json: { notice: 'Location was removed from favorites' }, status: 201
     end
@@ -59,7 +61,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit( :location_type_id, :name, :address, :description,
+    params.require(:location).permit(:location_type_id, :name, :address, :description,
                                      location_facilities_attributes: %i[id name])
   end
 

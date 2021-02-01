@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Location < ApplicationRecord
   # Geocoding goodness
   geocoded_by :address
@@ -5,7 +7,7 @@ class Location < ApplicationRecord
   # Validations
   validates :name, :location_type, :address, presence: true
 
-  validates :description, length: { maximum: 5000 }, presence: :true
+  validates :description, length: { maximum: 5000 }, presence: true
 
   # Relationships
   belongs_to :location_type
@@ -25,14 +27,13 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :location_facilities, allow_destroy: true, reject_if: lambda { |attr|
                                                                                         attr['name'].blank?
                                                                                       }
-def get_facilities(location)
-  facilities = []
-  location.location_facilities.each do |fac|
-    facilities << fac.facility.name
+  def get_facilities(location)
+    facilities = []
+    location.location_facilities.each do |fac|
+      facilities << fac.facility.name
+    end
+    facilities
   end
-  facilities
-end
-
 
   # Makes the JSON request easier to work with on the React side
   def transform_json
@@ -47,8 +48,8 @@ end
       latitude: latitude,
       posted: created_at,
       edited: updated_at,
-      reviews: self.reviews,
-      facilities:get_facilities(self)
+      reviews: reviews,
+      facilities: get_facilities(self)
     }
   end
 
