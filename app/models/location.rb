@@ -42,7 +42,7 @@ class Location < ApplicationRecord
     {
       id: id,
       user: user.username,
-      location_type: location_type.name,
+      location_type_name: location_type.name,
       name: name,
       address: address,
       description: description,
