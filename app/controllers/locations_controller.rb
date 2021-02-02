@@ -31,12 +31,18 @@ class LocationsController < ApplicationController
   end
 
   def update
+    unless current_user.is_admin
     @location.update(location_params)
-    if @location.errors.any?
-      render json: @location.errors, status: :unprocessable_entity
-    else
-      render json: @location.transform_json, status: 201
+      if @location.errors.any?
+        render json: @location.errors, status: :unprocessable_entity
+      else
+        render json: @location.transform_json, status: 201
+      end
+    else 
+      LocationNotifierMailer.change_location_mail(current_user, @location).deliver
+      render json: {notice:'Location changes have been sent to the admin for approval, they should be in touch soon.'}
     end
+
   end
 
   def destroy
@@ -77,7 +83,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:location_type_name, :name, :address, :description,
+    params.require(:location).permit(:location_type_name, :name, :address, :description,:location_type_id,
                                      location_facilities_attributes: [:name])
   end
 

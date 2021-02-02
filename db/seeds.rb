@@ -9,7 +9,7 @@ new_users = [{ name: 'steve', email: 'steve@s.com', password: '123456' },
 location_facilities = ['Toilets', 'Food', 'Parking', 'Water', 'Off Lead']
 
 location_types = ['Dog park', 'Park', 'Beach', 'Dog Cafe']
-
+User.create(username:'admin',email:'OffTheLeashSuper@gmail.com',password:'AdminPassword',password_confirmation:'AdminPassword',is_admin:true)
 if User.count.zero?
   new_users.each do |user|
     User.create(username: user[:name], email: user[:email], password: user[:password],

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hey there, <%= @user.username %> wants to change a location</h1>
+    <p>you can reach them at  <%= @user.email %> if you need to discuss the proposed changes but the long and the short of it is as follows </p>
+    <h3>Location</h3>
+    <p><%= @location.name %>Id:<%= @location.id %></p>
+    <h3>Location Type</h3>
+    <p><%= @location.location_type.name%></p>
+    <h3>Address</h3>
+    <p><%= @location.address %></p>
+    <h3>Description</h3>
+    <p><%= @location.description %></p>
+    <
+  </body>
+</html>
