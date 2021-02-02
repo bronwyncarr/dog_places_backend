@@ -3,7 +3,6 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user, except: [:index,:get_static_assests]
   before_action :set_location, only: %i[show update destroy]
-  # before_action :owner?, only: %i[update destroy]
   def index
     @locations = Location.all.includes(%i[location_type user reviews])
     render json: @locations.map(&:transform_json)
@@ -33,15 +32,15 @@ class LocationsController < ApplicationController
   def update
     unless current_user.is_admin
     @location.update(location_params)
+    end
       if @location.errors.any?
         render json: @location.errors, status: :unprocessable_entity
       else
         render json: @location.transform_json, status: 201
+        LocationNotifierMailer.change_location_mail(current_user, @location).deliver
+        render json: {notice:'Location changes have been sent to the admin for approval, they should be in touch soon.'}
       end
-    else 
-      LocationNotifierMailer.change_location_mail(current_user, @location).deliver
-      render json: {notice:'Location changes have been sent to the admin for approval, they should be in touch soon.'}
-    end
+  end
 
   end
 
@@ -83,7 +82,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:location_type_name, :name, :address, :description,:location_type_id,
+    params.require(:location).permit(:location_type_name, :name, :address, :description,:location_type_id,:is_admin,
                                      location_facilities_attributes: [:name])
   end
 

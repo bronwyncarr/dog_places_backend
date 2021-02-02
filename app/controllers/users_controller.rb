@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       # Deliver the signup email
       UserNotifierMailer.send_signup_email(@user).deliver
       auth_token = Knock::AuthToken.new payload: { sub: @user.id }
-      render json: { username: @user.username, jwt: auth_token.token }, status: :created
+      render json: { username: @user.username, jwt: auth_token.token}, status: :created
 
     else
 
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
     if @user&.authenticate(params[:user][:password])
       auth_token = Knock::AuthToken.new payload: { sub: @user.id }
-      render json: { username: @user.username, jwt: auth_token.token }, status: 200
+      render json: { username: @user.username, jwt: auth_token.token , is_admin:@user.is_admin }, status: 200
     else
       render json: { error: 'Incorrect Email or Password' }, status: 404
     end
