@@ -51,7 +51,7 @@ class Location < ApplicationRecord
       posted: created_at,
       edited: updated_at,
       reviews: reviews,
-      facilities: get_facilities(self)
+      location_facilities_attributes: get_facilities(self)
     }
   end
 
