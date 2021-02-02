@@ -15,7 +15,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review.delete
+    @review.destroy
 
     render json: { notice: 'review was deleted' }, status: 204
   end

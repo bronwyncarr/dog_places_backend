@@ -5,7 +5,7 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show update destroy]
   # before_action :owner?, only: %i[update destroy]
   def index
-    @locations = Location.all.includes(%i[location_type user])
+    @locations = Location.all.includes(%i[location_type user reviews])
     render json: @locations.map(&:transform_json)
   end
 
@@ -40,7 +40,7 @@ class LocationsController < ApplicationController
   end
 
   def destroy
-    @location.delete
+    @location.destroy
 
     render json: @location.transform_json, status: 204
   end

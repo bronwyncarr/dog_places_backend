@@ -21,7 +21,6 @@ class Location < ApplicationRecord
   has_many_attached :images
   # Allows users to select favourites
   has_many :favourites, dependent: :destroy
-  has_many :users, through: :favourites
 
   # nested location facilities config
   accepts_nested_attributes_for :location_facilities, allow_destroy: true, reject_if: lambda { |attr|
