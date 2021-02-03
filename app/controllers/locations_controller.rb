@@ -30,7 +30,8 @@ class LocationsController < ApplicationController
   end
 
   def update
-    unless current_user.is_admin
+    
+    if current_user.is_admin
     @location.update(location_params)
     end
       if @location.errors.any?
@@ -45,6 +46,7 @@ class LocationsController < ApplicationController
   
 
   def destroy
+    
     @location.destroy
 
     render json: @location.transform_json, status: 204
@@ -92,11 +94,6 @@ class LocationsController < ApplicationController
     render json: { error: 'Location not found' }, status: 404
   end
 
-  def owner?
-    if current_user.id != @location.user_id
-      render json: { error: 'you have no power here (this isnt yours so you cant dowhatever you just tried)' },
-             status: 401
-    end
-  end
+  
   
 end
