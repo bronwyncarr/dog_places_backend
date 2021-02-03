@@ -3,8 +3,11 @@ class FavouritesController < ApplicationController
   
 
   def index
-    @favourites = current_user.favourites.order(created_at: :desc)
-    render json: @favourites.map(&:transform_json), status: 201
+   @faves_arr = []
+    @favourites = current_user.favourites.map do |fave|
+      @faves_arr << Location.findy_by_id(fave.location_id)
+    end
+    render json: @faves_arr.map(&:transform_json), status: 201
   end
 
   def create
