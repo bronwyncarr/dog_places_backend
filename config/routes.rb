@@ -23,7 +23,7 @@ Rails.application.routes.draw do
         post '/destroy/:id', to: 'reviews#destroy'
     end
     #favorites end points
-    scope '/locations/favorrite' do 
+    scope '/locations/favorites' do 
       post '/new', to: 'favourite#create'
       delete '/destroy', to: 'favourite#destroy'
       get '/index',to:'favourite#index'
