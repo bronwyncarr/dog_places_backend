@@ -1,9 +1,10 @@
 class FavouritesController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-  before_action :find_location!
+  before_action :authenticate_user
+  
 
   def index
     @favourites = current_user.favourites.order(created_at: :desc)
+    render json: @favourites.map(&:transform_json), status: 201
   end
 
   def create
@@ -20,11 +21,9 @@ class FavouritesController < ApplicationController
 
   private
 
-  def find_location!
-    @favourite = Location.find(params[:location_id])
-  end
+  
 
   def favourite_params
-    params.require(:favourite).permit(:body)
+    params.require(:favourite).permit(:location_id)
   end
 end
