@@ -18,9 +18,9 @@ Rails.application.routes.draw do
       post '/sign_in', to: 'users#sign_in'
       end
       # reviews end points 
-      scope '/locations/review' do
-        post '/new/', to: 'review#create'
-        post '/destroy/:id', to: 'review#destroy'
+      scope '/locations/:id/review' do
+        post '/new/', to: 'reviews#create'
+        post '/destroy/:id', to: 'reviews#destroy'
     end
     #favorites end points
     scope '/location/favorite' do 

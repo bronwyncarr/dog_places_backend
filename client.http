@@ -86,7 +86,7 @@ Content-Type: application/json
 {
 "user":
 {
-    "email":"test@me.com",
+    "username":"testyboi",
     "password":"testme"
     
 }
@@ -109,3 +109,15 @@ Content-Type: application/json
 ###testing location data method
 GET  http://localhost:3000/api/locations/static_assests
 Content-Type: application/json
+
+###testing New Review method notethis requires you to set the user manually in the review create method
+
+POST http://localhost:3000/api/locations/2/review/new/
+Content-Type: application/json
+Authorization: Bearer "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI0MjQ5MjIsInN1YiI6NH0.eyiHeKiKlyvPphYOnA63ZbGYiqQhf84oBtmmhNADAHw"
+
+{"review":
+   {"body":"textaroni",
+   "rating": "numberaroni",
+   "location_id":2}
+}
