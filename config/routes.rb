@@ -19,8 +19,8 @@ Rails.application.routes.draw do
       end
       # reviews end points 
       scope '/locations/review' do
-        post '/new/:id', to: 'review#create'
-        post '/destroy/:id', to: 'review#create'
+        post '/new/', to: 'review#create'
+        post '/destroy/:id', to: 'review#destroy'
     end
     #favorites end points
     scope '/location/favorite' do 
