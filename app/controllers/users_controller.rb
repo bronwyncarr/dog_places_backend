@@ -28,6 +28,10 @@ class UsersController < ApplicationController
       render json: { error: 'Incorrect Email or Password' }, status: 404
     end
   end
+  def destroy
+    @user.destroy
+    render json:{notice: 'Your account has been deleted'}, status: 201
+  end
 
   private
 

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post 'user_token' => 'user_token#create'
       post '/sign_up', to: 'users#create'
       post '/sign_in', to: 'users#sign_in'
+      delete '/user/destroy',to:"users#destroy"
       end
       # reviews end points 
       scope '/locations/review' do
@@ -24,9 +25,9 @@ Rails.application.routes.draw do
     end
     #favorites end points
     scope '/locations/favorites' do 
-      post '/new', to: 'favourite#create'
-      delete '/destroy', to: 'favourite#destroy'
-      get '/index',to:'favourite#index'
+      post '/new', to: 'favourites#create'
+      delete '/destroy', to: 'favourits#destroy'
+      get '/favourites',to:'favourites#index'
     end
   end
 end
