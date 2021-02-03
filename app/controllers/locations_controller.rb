@@ -4,14 +4,14 @@ class LocationsController < ApplicationController
   before_action :authenticate_user, except: [:index,:get_static_assests]
   before_action :set_location, only: %i[show update destroy]
   def index
-    @locations = Location.all.includes(%i[location_type user reviews])
+    @locations = Location.all.includes(%i[location_type  reviews])
     render json: @locations.map(&:transform_json)
   end
 
   def create
     
     @location = Location.new(location_params)
-    @location.user_id = current_user.id
+    
     @location.location_type = LocationType.find_by_name(params[:location_type_name])
     @location.save
 
@@ -38,7 +38,7 @@ class LocationsController < ApplicationController
         render json: @location.errors, status: :unprocessable_entity
       else
         render json: @location.transform_json, status: 201
-        LocationNotifierMailer.change_location_mail(current_user, @location).deliver
+        LocationNotifierMailer.change_location_mailer(current_user, @location).deliver
         render json: {notice:'Location changes have been sent to the admin for approval, they should be in touch soon.'}
       end
   end
@@ -47,9 +47,14 @@ class LocationsController < ApplicationController
 
   def destroy
     
+    if current_user.is_admin
     @location.destroy
-
     render json: @location.transform_json, status: 204
+    else
+      
+      LocationNotifierMailer.delete_location_mailer(current_user,@location,location_params[:description]).deliver
+      render json: {notice:'Location changes have been sent to the admin for approval, they should be in touch soon.'}
+    end
   end
 
   def nearme; end

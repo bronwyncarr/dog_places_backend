@@ -11,7 +11,7 @@ class Location < ApplicationRecord
 
   # Relationships
   belongs_to :location_type
-  belongs_to :user
+ 
   has_many :reviews, dependent: :destroy
   # Allows many facilities to be listed for each location
   has_many :location_facilities, dependent: :destroy
@@ -40,7 +40,6 @@ class Location < ApplicationRecord
   def transform_json
     {
       id: id,
-      user: user.username,
       location_type_name: location_type.name,
       name: name,
       address: address,
