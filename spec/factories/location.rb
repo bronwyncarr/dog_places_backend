@@ -1,7 +1,11 @@
 FactoryBot.define do
   factory :location do
-  location_type_id{1}
-  name {'KccDogPark'}
+    association :location_type, factory: :location_type
+  
+
+  sequence :name do |n|
+  "location number #{n}"
+  end
   address { '655 westernport highway' }
   description {"A fun dog park for all to come and play!"}
   end

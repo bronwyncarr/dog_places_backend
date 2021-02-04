@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Location, type: :model do
-  subject { FactoryBot.build(:location)}
+  subject { FactoryBot.create(:location)}
   context 'validations'do
   it 'is valid with valid attributes' do
+    
     expect(subject).to be_valid
     end
 
