@@ -5,10 +5,13 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show update destroy]
   def index
     @locations = Location.all.includes(%i[location_type  reviews])
-    render json: @locations.map do |item|
-      item.transform_json
-      item[:faved]= fave_check(item.id)
+    @locations.map(&:transform_json).map do | item| 
+      byebug
+      if current_user
+        item["faved"] = fave_check(item[:id])
+      end
     end
+          render json: @locations 
   end
 
   def create
@@ -62,8 +65,8 @@ class LocationsController < ApplicationController
 
   def nearme; end
   def fave_check(id)
-    byebug
-    current_user.favourites.includes(id)
+    
+    current_user.favourites.include?(id)
   end
 
   def favourite
