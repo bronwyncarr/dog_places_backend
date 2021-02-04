@@ -24,7 +24,9 @@ class ApplicationRecord < ActiveRecord::Base
       posted: created_at,
       edited: updated_at,
       reviews: reviews,
-      location_facilities_attributes: get_facilities(self)
+      location_facilities_attributes: get_facilities(self),
+      faved:current_user.favourites.includes(id),
+      google_api_key: Rails.application.credentials.dig(:google_maps, :api_key)
     }
   end
 end

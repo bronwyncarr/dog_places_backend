@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-02-03T22:58:49+11:00">2021-02-03T22:58:49+11:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-02-04T15:53:09+11:00">2021-02-04T15:53:09+11:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  31.37%
+  30.33%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.31
+         0.3
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>204</b> relevant lines,
+    <b>211</b> relevant lines,
     <span class="green"><b>64</b> lines covered</span> and
-    <span class="red"><b>140</b> lines missed. </span>
+    <span class="red"><b>147</b> lines missed. </span>
     (<span class="red">
-  31.37%
+  30.33%
 </span>
 )
   </div>
@@ -106,10 +106,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#09b0fc9f5f0589c165bfa76750dd0482b5f44f8b" class="src_link" title="app/controllers/favourites_controller.rb">app/controllers/favourites_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">29</td>
-            <td class="cell--number">20</td>
+            <td class="cell--number">32</td>
+            <td class="cell--number">23</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">20</td>
+            <td class="cell--number">23</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -150,10 +150,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#51f3fd993c3d2bfa42a47326747e5d64a8b46fed" class="src_link" title="app/controllers/users_controller.rb">app/controllers/users_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">37</td>
-            <td class="cell--number">25</td>
+            <td class="cell--number">41</td>
+            <td class="cell--number">29</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">25</td>
+            <td class="cell--number">29</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -302,14 +302,14 @@
     <span class="group_name">Controllers</span>
     (<span class="covered_percent">
       <span class="red">
-  13.22%
+  12.5%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.13
+         0.12
        </span>
     </span> hits/line
     )
@@ -322,11 +322,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>121</b> relevant lines,
+    <b>128</b> relevant lines,
     <span class="green"><b>16</b> lines covered</span> and
-    <span class="red"><b>105</b> lines missed. </span>
+    <span class="red"><b>112</b> lines missed. </span>
     (<span class="red">
-  13.22%
+  12.5%
 </span>
 )
   </div>
@@ -363,10 +363,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#09b0fc9f5f0589c165bfa76750dd0482b5f44f8b" class="src_link" title="app/controllers/favourites_controller.rb">app/controllers/favourites_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">29</td>
-            <td class="cell--number">20</td>
+            <td class="cell--number">32</td>
+            <td class="cell--number">23</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">20</td>
+            <td class="cell--number">23</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -407,10 +407,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#51f3fd993c3d2bfa42a47326747e5d64a8b46fed" class="src_link" title="app/controllers/users_controller.rb">app/controllers/users_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">37</td>
-            <td class="cell--number">25</td>
+            <td class="cell--number">41</td>
+            <td class="cell--number">29</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">25</td>
+            <td class="cell--number">29</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -1238,9 +1238,9 @@
     
 
     <div class="t-line-summary">
-      <b>20</b> relevant lines.
+      <b>23</b> relevant lines.
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>20</b> lines missed.</span>
+      <span class="red"><b>23</b> lines missed.</span>
     </div>
 
     
@@ -1312,7 +1312,7 @@
 
             
 
-            <code class="ruby">    @favourites = current_user.favourites.order(created_at: :desc)</code>
+            <code class="ruby">   @faves_arr = []</code>
           </li>
         </div>
       
@@ -1323,7 +1323,7 @@
 
             
 
-            <code class="ruby">    render json: @favourites.map(&amp;:transform_json), status: 201</code>
+            <code class="ruby">    @favourites = current_user.favourites.map do |fave|</code>
           </li>
         </div>
       
@@ -1334,18 +1334,18 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">      @faves_arr &lt;&lt; Location.findy_by_id(fave.location_id)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="9">
+          <li class="missed" data-hits="0" data-linenumber="9">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -1356,7 +1356,7 @@
 
             
 
-            <code class="ruby">  def create</code>
+            <code class="ruby">    render json: @faves_arr.map(&amp;:transform_json), status: 201</code>
           </li>
         </div>
       
@@ -1367,45 +1367,12 @@
 
             
 
-            <code class="ruby">    @favourite = current_user.favourites.new(favourite_params)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="12">
-            
-            
-
-            
-
-            <code class="ruby">    @favourite.user_id = current_user.id</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="13">
-            
-            
-
-            
-
-            <code class="ruby">    @favourite.save</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="14">
-            
-            
-
-            
-
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="15">
+          <li class="never" data-hits="" data-linenumber="12">
             
             
 
@@ -1416,13 +1383,46 @@
         </div>
       
         <div>
+          <li class="missed" data-hits="0" data-linenumber="13">
+            
+            
+
+            
+
+            <code class="ruby">  def create</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="14">
+            
+            
+
+            
+
+            <code class="ruby">    @favourite = current_user.favourites.new(favourite_params)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="15">
+            
+            
+
+            
+
+            <code class="ruby">    @favourite.user_id = current_user.id</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="missed" data-hits="0" data-linenumber="16">
             
             
 
             
 
-            <code class="ruby">  def destroy</code>
+            <code class="ruby">    @favourite.save</code>
           </li>
         </div>
       
@@ -1433,7 +1433,7 @@
 
             
 
-            <code class="ruby">    @favourite.destroy</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -1455,7 +1455,7 @@
 
             
 
-            <code class="ruby">    render json: { notice: &#39;favourite was deleted&#39; }, status: 204</code>
+            <code class="ruby">  def destroy</code>
           </li>
         </div>
       
@@ -1466,7 +1466,7 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    @favourite.destroy</code>
           </li>
         </div>
       
@@ -1488,67 +1488,12 @@
 
             
 
-            <code class="ruby">  private</code>
+            <code class="ruby">    render json: { notice: &#39;favourite was deleted&#39; }, status: 204</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="23">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="24">
-            
-            
-
-            
-
-            <code class="ruby">  </code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="25">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="26">
-            
-            
-
-            
-
-            <code class="ruby">  def favourite_params</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="27">
-            
-            
-
-            
-
-            <code class="ruby">    params.require(:favourite).permit(:location_id)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="28">
+          <li class="missed" data-hits="0" data-linenumber="23">
             
             
 
@@ -1559,7 +1504,95 @@
         </div>
       
         <div>
+          <li class="never" data-hits="" data-linenumber="24">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="25">
+            
+            
+
+            
+
+            <code class="ruby">  private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="26">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="27">
+            
+            
+
+            
+
+            <code class="ruby">  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="28">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
           <li class="missed" data-hits="0" data-linenumber="29">
+            
+            
+
+            
+
+            <code class="ruby">  def favourite_params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="30">
+            
+            
+
+            
+
+            <code class="ruby">    params.require(:favourite).permit(:location_id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="31">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="32">
             
             
 
@@ -3188,9 +3221,9 @@
     
 
     <div class="t-line-summary">
-      <b>25</b> relevant lines.
+      <b>29</b> relevant lines.
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>25</b> lines missed.</span>
+      <span class="red"><b>29</b> lines missed.</span>
     </div>
 
     
@@ -3531,13 +3564,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
+          <li class="missed" data-hits="0" data-linenumber="31">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  def destroy</code>
           </li>
         </div>
       
@@ -3548,18 +3581,18 @@
 
             
 
-            <code class="ruby">  private</code>
+            <code class="ruby">    @user.destroy</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="33">
+          <li class="missed" data-hits="0" data-linenumber="33">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    render json:{notice: &#39;Your account has been deleted&#39;}, status: 201</code>
           </li>
         </div>
       
@@ -3570,18 +3603,18 @@
 
             
 
-            <code class="ruby">  def user_params</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="35">
+          <li class="never" data-hits="" data-linenumber="35">
             
             
 
             
 
-            <code class="ruby">    params.require(:user).permit(:username, :email, :password, :password_confirmation, :auth)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -3592,12 +3625,56 @@
 
             
 
+            <code class="ruby">  private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="37">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="38">
+            
+            
+
+            
+
+            <code class="ruby">  def user_params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="39">
+            
+            
+
+            
+
+            <code class="ruby">    params.require(:user).permit(:username, :email, :password, :password_confirmation, :auth)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="40">
+            
+            
+
+            
+
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="37">
+          <li class="missed" data-hits="0" data-linenumber="41">
             
             
 

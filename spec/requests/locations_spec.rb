@@ -12,7 +12,7 @@ RSpec.describe LocationsController, type: :request do
       it 'returns HTTP status 201' do
       expect(response).to have_http_status(201)
       end
-      it 'hasthe right number of entries'do 
+      it 'has the right number of entries'do 
       expect(@json_response['locations'].count).to eq(2)
       end
       it 'routes to #show' do
