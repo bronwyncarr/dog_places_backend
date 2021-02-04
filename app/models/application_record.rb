@@ -2,7 +2,7 @@
 
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
-   # the cleanest way i could thnk of to get the names for facilities from the join table
+   # the cleanest way i could think of to get the names for facilities from the join table
    def get_facilities(location)
     facilities = []
     location.location_facilities.each do |fac|

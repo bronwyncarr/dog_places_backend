@@ -8,6 +8,7 @@ class LocationNotifierMailer < ApplicationMailer
     mail(to: 'OffTheLeashSuper@gmail.com',
          subject: 'Proposed location change')
   end
+  # delete location request.
   def delete_location_mailer(user,location,reason)
     @user = user
     @location= location

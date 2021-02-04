@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
   
 
   def create
-    # finds the location to attach the review to and creates the new review then assigns the review to the logged in user and attaches aimageif theuser uploaded one
+    # finds the location to attach the review to and creates the new review then assigns the review to the logged in user and attaches a imageif the user uploaded one
     @review = Location.find_by(id:review_params[:location_id]).reviews.new(review_params)
     @review.user_id = current_user.id
     if review_params[:file]

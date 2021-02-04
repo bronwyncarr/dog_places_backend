@@ -1,7 +1,7 @@
 class FavouritesController < ApplicationController
   before_action :authenticate_user
   
-# here we needed to find the location 
+# here we needed to find the location then put all the location in an array so we could use the transform_json method and have a standard return
   def index
    @faves_arr = []
     @favourites = current_user.favourites.map do |fave|

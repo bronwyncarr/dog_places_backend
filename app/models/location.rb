@@ -29,11 +29,7 @@ class Location < ApplicationRecord
                                                                                      
  
 
-  # Favorites integration
-  def favorite?(user)
-    !!favourites.find { |favorite| favorite.user_id == user.id }
-  end
-
+  
   
 
 end
