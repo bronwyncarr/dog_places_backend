@@ -49,5 +49,7 @@ Favourite.create(user_id: 2, location_id: 1)
 
 LocationFacility.create(facility_id: 1, location_id: 1)
 LocationFacility.create(facility_id: 2, location_id: 1)
+LocationFacility.create(facility_id: 2, location_id: 2)
+LocationFacility.create(facility_id: 3, location_id: 3)
 Review.create(location_id: 1, user_id: 2, body: 'testing this out', rating: 4)
 Review.create(location_id: 2, user_id: 1, body: 'testing this out againn', rating: 2)

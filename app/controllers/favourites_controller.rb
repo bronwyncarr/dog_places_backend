@@ -5,8 +5,9 @@ class FavouritesController < ApplicationController
   def index
    @faves_arr = []
     @favourites = current_user.favourites.map do |fave|
-      @faves_arr << Location.findy_by_id(fave.location_id)
+      @faves_arr << Location.find_by_id(fave.location_id)
     end
+    
     render json: @faves_arr.map(&:transform_json), status: 201
   end
 

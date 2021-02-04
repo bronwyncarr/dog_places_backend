@@ -8,12 +8,14 @@ class ApplicationRecord < ActiveRecord::Base
     location.location_facilities.each do |fac|
       facilities << fac.facility.name
     end
+   
     facilities
   end
 
   # Makes the JSON request easier to work with on the React side thisis called on the Location object before transmitting it to extract details relating to the location so instead of say having user come through as an niteger it comes through with the string 
   def transform_json
-    {
+    facility_array = get_facilities(self)
+   res =  {
       id: id,
       location_type_name: location_type.name,
       name: name,
@@ -25,8 +27,10 @@ class ApplicationRecord < ActiveRecord::Base
       edited: updated_at,
       reviews: reviews,
       faved: false,
-      location_facilities_attributes: get_facilities(self),
+      location_facilities_attributes: facility_array,
       google: Rails.application.credentials.dig(:google_maps, :api_key)
     }
+    
+    res
   end
 end
