@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### show location id 1
-GET http://localhost:3000/api/locations/1
+GET http://localhost:3000/api/locations/2
 
 ### unsuccessful location show
 GET http://localhost:3000/api/locations/100

@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
-  before_action :authenticate_user, except: [:index,:get_static_assests]
+  #before_action :authenticate_user, except: [:index,:get_static_assests]
   before_action :set_location, only: %i[show update destroy]
   def index
     @locations = Location.all.includes(%i[location_type  reviews])
-    render json: @locations.map(&:transform_json)
+    render json: @locations.map do |item|
+      item.transform_json
+      item[:faved]= fave_check(item.id)
+    end
   end
 
   def create
@@ -58,6 +61,10 @@ class LocationsController < ApplicationController
   end
 
   def nearme; end
+  def fave_check(id)
+    byebug
+    current_user.favourites.includes(id)
+  end
 
   def favourite
     type = params[:favourite]
