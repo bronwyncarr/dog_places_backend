@@ -31,6 +31,7 @@ class FavouritesController < ApplicationController
   private
 
   def set_favourite
+    # Something is not right here I suspect :(
     @favourite = Favourite.find(favourite_params[:favourite_id])
   rescue StandardError
     render json: { error: 'favourite not found' }, status: 404
