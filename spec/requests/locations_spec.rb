@@ -15,9 +15,6 @@ RSpec.describe LocationsController, type: :request do
       it 'has the right number of entries'do 
       expect(@json_response['locations'].count).to eq(2)
       end
-      it 'routes to #show' do
-        expect(get: '/api/locations/1').to route_to('locations#show', id: '1')
-      end
 
       it 'routes to #create' do
         expect(post: '/api/locations').to route_to('locations#create')
@@ -33,6 +30,28 @@ RSpec.describe LocationsController, type: :request do
       it 'routes to #delete via delete' do
         expect(delete: '/api/locations/1').to route_to('locations#destroy', id: '1')
       end
+        describe 'POST Locations#create' do
+      context 'when the location is valid' do
+        before(:example) do 
+        @location_params = FactoryBot.attributes_for(:location)
+        post locations_path, params: {location: location_params}
+      end
+        it 'returns a http status 201'
+        expect(response).to have_http_status(201)
+        end  
+        it 'saves location to the database' do 
+          expect(Location.last.id).to eq(@location_params) 
+        end   
+      end
+      context ' when the location is invalid'do
+      before(:example)  do
+      @location_params= FactoryBot.attributes_for(:location, :invalid)
+      post locations_path, params: {location: location_params}
+        @json_respone = JSON.parse(response.body)
+    end  
+    it 'should return unprocessable entity'
+    expect(response).to have_http_status(:unprocessable_entity)
+    end
     end
   end
 end

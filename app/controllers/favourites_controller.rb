@@ -6,7 +6,7 @@ class FavouritesController < ApplicationController
   def index
    @faves_arr = []
     @favourites = current_user.favourites.map do |fave|
-      @faves_arr << favourite.find_by_id(fave.favourite_id)
+      @faves_arr << Location.find_by_id(fave.location_id)
     end
     
     render json: @faves_arr.map(&:transform_json), status: 201
@@ -27,7 +27,7 @@ class FavouritesController < ApplicationController
   private
 
   def set_favourite
-    @favourite = Favourite.find(params[:id])
+    @favourite = Favourite.find(favourite_params[:favourite_id])
   rescue StandardError
     render json: { error: 'favourite not found' }, status: 404
   end
