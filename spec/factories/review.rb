@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :review do
-    location_id {1}
+    association :location, factory: :location
+    association :user, factory: :user
+
     body {" testing this out"}
-    rating {7}
+    rating {4}
   end
 end

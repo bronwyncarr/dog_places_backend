@@ -6,6 +6,6 @@ FactoryBot.define do
     username { 'John' }
     email { 'Doe@d.com' }
     password { 'password' }
-    admin { false }
+    is_admin { false }
   end
 end

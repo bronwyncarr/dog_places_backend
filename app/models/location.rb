@@ -18,7 +18,7 @@ class Location < ApplicationRecord
   has_many :facilities, through: :location_facilities
 
   # Image uploading
-  has_many_attached :images
+  has_one_attached :image
   # Allows users to select favourites
   has_many :favourites, dependent: :destroy
 

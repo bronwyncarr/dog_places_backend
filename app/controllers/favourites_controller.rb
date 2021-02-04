@@ -1,7 +1,7 @@
 class FavouritesController < ApplicationController
   before_action :authenticate_user
   
-
+# here we needed to find the location 
   def index
    @faves_arr = []
     @favourites = current_user.favourites.map do |fave|
