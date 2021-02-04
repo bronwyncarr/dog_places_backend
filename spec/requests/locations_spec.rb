@@ -7,7 +7,7 @@ RSpec.describe LocationsController, type: :request do
     before(:example) do
       @first_location = FactoryBot.create(:location)
       @second_location = FactoryBot.create(:location)
-      get tasks_path
+      get location_path
       @json_response = JSON.parse(response.body)
       it 'returns HTTP status 201' do
       expect(response).to have_http_status(201)

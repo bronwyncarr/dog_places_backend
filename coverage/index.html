@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-02-04T23:13:26+11:00">2021-02-04T23:13:26+11:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-02-04T23:24:20+11:00">2021-02-04T23:24:20+11:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -1356,7 +1356,7 @@
 
             
 
-            <code class="ruby">      @faves_arr &lt;&lt; favourite.find_by_id(fave.favourite_id)</code>
+            <code class="ruby">      @faves_arr &lt;&lt; Location.find_by_id(fave.location_id)</code>
           </li>
         </div>
       
@@ -1587,7 +1587,7 @@
 
             
 
-            <code class="ruby">    @favourite = Favourite.find(params[:id])</code>
+            <code class="ruby">    @favourite = Favourite.find(favourite_params[:favourite_id])</code>
           </li>
         </div>
       
