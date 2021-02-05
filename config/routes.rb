@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   scope '/api' do
-    # locations end points 
+    # locations end points
     get '/locations', to: 'locations#index'
     post '/locations', to: 'locations#create'
     get '/locations/static_assests', to: 'locations#get_static_assests'
@@ -11,23 +11,23 @@ Rails.application.routes.draw do
     put '/locations/:id', to: 'locations#update'
     delete '/locations/:id', to: 'locations#destroy'
     get '/locations/nearme', to: 'locations#nearme'
-    # user sign up and authentication end points 
+    # user sign up and authentication end points
     scope '/auth' do
       post 'user_token' => 'user_token#create'
       post '/sign_up', to: 'users#create'
       post '/sign_in', to: 'users#sign_in'
-      delete '/user/destroy',to:"users#destroy"
-      end
-      # reviews end points 
-      scope '/locations/review' do
-        post '/new', to: 'reviews#create'
-        post '/destroy/:id', to: 'reviews#destroy'
+      delete '/user/destroy', to: 'users#destroy'
     end
-    #favorites end points
-    scope '/locations/favorites' do 
+    # reviews end points
+    scope '/locations/review' do
+      post '/new', to: 'reviews#create'
+      post '/destroy/:id', to: 'reviews#destroy'
+    end
+    # favorites end points
+    scope '/locations/favorites' do
       post '/new', to: 'favourites#create'
       delete '/destroy', to: 'favourites#destroy'
-      get '/favourites',to:'favourites#index'
+      get '/favourites', to: 'favourites#index'
     end
   end
 end

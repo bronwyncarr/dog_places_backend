@@ -11,7 +11,7 @@ class Location < ApplicationRecord
 
   # Relationships
   belongs_to :location_type
- 
+
   has_many :reviews, dependent: :destroy
   # Allows many facilities to be listed for each location
   has_many :location_facilities, dependent: :destroy
@@ -26,10 +26,4 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :location_facilities, allow_destroy: true, reject_if: lambda { |attr|
                                                                                         attr['name'].blank?
                                                                                       }
-                                                                                     
- 
-
-  
-  
-
 end

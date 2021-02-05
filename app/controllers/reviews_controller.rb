@@ -1,20 +1,15 @@
 # frozen_string_literal: true
 
 class ReviewsController < ApplicationController
- before_action :authenticate_user
-  
-
-  
+  before_action :authenticate_user
 
   def create
     # finds the location to attach the review to and creates the new review then assigns the review to the logged in user and attaches a imageif the user uploaded one
-    @review = Location.find_by(id:review_params[:location_id]).reviews.new(review_params)
+    @review = Location.find_by(id: review_params[:location_id]).reviews.new(review_params)
     @review.user_id = current_user.id
-    if review_params[:file]
-      @review.image.attach(params[:file])
-    end
+    @review.image.attach(params[:file]) if review_params[:file]
     @review.save
-    render json: {notice: 'Favourite was added!'}, status: 201
+    render json: { notice: 'Favourite was added!' }, status: 201
   end
 
   def destroy
@@ -24,10 +19,7 @@ class ReviewsController < ApplicationController
 
   private
 
- 
-
   def review_params
-    
-    params.require(:review).permit(:body, :file,:rating, :location_id)
+    params.require(:review).permit(:body, :file, :rating, :location_id)
   end
 end

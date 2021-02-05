@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 class FavouritesController < ApplicationController
   before_action :authenticate_user
   before_action :set_favourite, only: :destroy
-  
-# here we needed to find the favourite then put all the favourite in an array so we could use the transform_json method and have a standard return
+
+  # here we needed to find the favourite then put all the favourite in an array so we could use the transform_json method and have a standard return
   def index
-    
-   @faves_arr = []
+    @faves_arr = []
     @favourites = current_user.favourites.map do |fave|
       @faves_arr << Location.find_by_id(fave.location_id)
     end
-  
+
     render json: @faves_arr.map(&:transform_json), status: 201
   end
 
@@ -17,9 +18,7 @@ class FavouritesController < ApplicationController
     @favourite = current_user.favourites.new(favourite_params)
     @favourite.user_id = current_user.id
     @favourite.save
-    if @favourite.errors.any?
-      render json: @favourite.errors, status: :unprocessable_entity
-    end
+    render json: @favourite.errors, status: :unprocessable_entity if @favourite.errors.any?
   end
 
   def destroy

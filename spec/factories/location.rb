@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :location do
     association :location_type, factory: :location_type
@@ -7,8 +9,8 @@ FactoryBot.define do
     end
     address { '655 westernport highway' }
     description { 'A fun dog park for all to come and play!' }
-    trait :invalid do 
-      name {nil}  
+    trait :invalid do
+      name { nil }
     end
   end
 end

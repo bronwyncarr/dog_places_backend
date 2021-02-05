@@ -6,6 +6,5 @@ class Favourite < ApplicationRecord
   belongs_to :location
   # the user and location must exist otherwise it just plain doesnt make sense
   validates :user, uniqueness: { scope: [:location_id] }
-  validates :location, uniqueness:{scope: [:user_id]}
-  
+  validates :location, uniqueness: { scope: [:user_id] }
 end

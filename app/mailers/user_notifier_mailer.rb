@@ -9,5 +9,4 @@ class UserNotifierMailer < ApplicationMailer
     mail(to: @user.email,
          subject: 'Thanks for signing up for our amazing app')
   end
-  
 end

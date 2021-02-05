@@ -11,5 +11,5 @@ class User < ApplicationRecord
 
   # Allows users to select favourites
   has_many :favourites, dependent: :destroy
-   has_many :locations, through: :favourites
+  has_many :locations, through: :favourites
 end

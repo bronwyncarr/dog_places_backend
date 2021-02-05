@@ -15,8 +15,9 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new(location_params)
+    @location = Location.new(params)
     # it was easiest to send through the location name rather than send the id and over to react and use sql to find the location based on the id because of how the react form is implimented
+    
     @location.location_type = LocationType.find_by_name(params[:location_type_name])
     @location.image.attach(params[:file])
     @location.save
@@ -38,44 +39,42 @@ class LocationsController < ApplicationController
 
   def update
     # the users cant update or delete locations once they're posted, instead they can makea requst to the admin account and then that account can decide if the changes are legitimate
-    if current_user.is_admin
-      @location.update(location_params) 
-    end
+    @location.update(location_params) if current_user.is_admin
     if @location.errors.any?
-      
+
       render json: @location.errors, status: :unprocessable_entity
     else
-      
+
       render json: @location.transform_json, status: 201
       # the email being sent to the admin
       LocationNotifierMailer.change_location_mailer(current_user, @location).deliver
-     
+
     end
   end
-# once again only admin can delete, this was because we were thinking of having legitimate business' on here and we worried about defamation.
+
+  # once again only admin can delete, this was because we were thinking of having legitimate business' on here and we worried about defamation.
   def destroy
     if current_user.is_admin
       @location.destroy
       render json: @location.transform_json, status: 204
     else
-# email being sent tho the admin
-      LocationNotifierMailer.delete_location_mailer(current_user, @location, location_params[:description]).deliver
-      render json: { notice: 'Location changes have been sent to the admin for approval, they should be in touch soon.' }
+      # email being sent tho the admin
+      LocationNotifierMailer.delete_location_mailer(current_user, @location, params[:description]).deliver
+      render json: { notice: 'Location changes have been sent to the admin for approval, they should be in touch soon.' },
+             status: 201
     end
   end
 
   def nearme; end
-# since the transform json method turns the return into a hash here we can check the users favourites based on the out put of that method and then send it back to the react side with the favourite boolean
+
+  # since the transform json method turns the return into a hash here we can check the users favourites based on the out put of that method and then send it back to the react side with the favourite boolean
   def fave_check(id)
-    if current_user
-      current_user.favourites.map do |fave|
-        fave.location_id == id
-      end
+    current_user&.favourites&.map do |fave|
+      fave.location_id == id
     end
   end
 
- 
-# thisis how we load the necesarry information on the react side to create a location, the locationtype and facilities were static so this just made sense.
+  # thisis how we load the necesarry information on the react side to create a location, the locationtype and facilities were static so this just made sense.
   def get_static_assests
     types = LocationType.all
     facilities = Facility.all
@@ -94,7 +93,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:location_type_name, :name, :address, :description, :location_type_id, :is_admin,
+    params.permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,
                                      location_facilities_attributes: [:name])
   end
 
