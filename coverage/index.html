@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-02-05T13:41:55+11:00">2021-02-05T13:41:55+11:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-02-05T13:53:50+11:00">2021-02-05T13:53:50+11:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -1937,7 +1937,7 @@
 
             
 
-            <code class="ruby">    @location = Location.new(location_params)</code>
+            <code class="ruby">    @location = Location.new(params)</code>
           </li>
         </div>
       
@@ -1981,7 +1981,7 @@
 
             
 
-            <code class="ruby">    @location.image.attach(location_params[:file])</code>
+            <code class="ruby">    @location.image.attach(params[:file])</code>
           </li>
         </div>
       
@@ -2421,7 +2421,7 @@
 
             
 
-            <code class="ruby">      LocationNotifierMailer.delete_location_mailer(current_user, @location, location_params[:description]).deliver</code>
+            <code class="ruby">      LocationNotifierMailer.delete_location_mailer(current_user, @location, params[:description]).deliver</code>
           </li>
         </div>
       
@@ -2795,7 +2795,7 @@
 
             
 
-            <code class="ruby">    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,</code>
+            <code class="ruby">    params.permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,</code>
           </li>
         </div>
       
