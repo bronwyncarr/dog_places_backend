@@ -86,7 +86,6 @@ class LocationsController < ApplicationController
     facilities.each do |facility|
       facility_array << facility.name
     end
-
     render json: { location_types: type_array, location_facilities: facility_array }
   end
 
