@@ -58,3 +58,6 @@ gem 'sendgrid-ruby', '~> 6.3'
 gem 'bullet', '~> 6.1'
 
 gem 'rubocop', '~> 1.9'
+# aws 
+
+gem "aws-sdk-s3", "~> 1.88"
