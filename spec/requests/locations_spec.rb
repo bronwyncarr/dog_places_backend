@@ -53,17 +53,17 @@ RSpec.describe LocationsController, type: :request do
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
-      context 'PUT Locations#update'  do
+      context 'PUT Locations#update' do
         before(:example) do
           @location_params = FactoryBot.attributes_for(:location, :valid)
-          @user = FactoryBot.create(:user,:admin)
+          @user = FactoryBot.create(:user, :admin)
           put locations_path, params: { location: location_params }
           @json_respone = JSON.parse(response.body)
         end
-        it ' allows admin users to update a post'do
-        expect(response).to have_http_status(201)
+        it ' allows admin users to update a post' do
+          expect(response).to have_http_status(201)
+        end
       end
     end
   end
-end
 end

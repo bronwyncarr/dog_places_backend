@@ -15,11 +15,10 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new(params)
+    @location = Location.new(location_params)
     # it was easiest to send through the location name rather than send the id and over to react and use sql to find the location based on the id because of how the react form is implimented
-    
+
     @location.location_type = LocationType.find_by_name(params[:location_type_name])
-    @location.image.attach(params[:file])
     @location.save
 
     if @location.errors.any?
@@ -65,7 +64,13 @@ class LocationsController < ApplicationController
     end
   end
 
-  def nearme; end
+  # geocoder nearby locations feature
+  def nearme
+    location = Geocoder.search(location_params[:address])
+    coords = location.first.coordinates
+    nearby = Location.near(coords, location_params[:description], units: :km)
+    render json: nearby.transform_json, status: 201
+  end
 
   # since the transform json method turns the return into a hash here we can check the users favourites based on the out put of that method and then send it back to the react side with the favourite boolean
   def fave_check(id)
@@ -92,8 +97,8 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,
-                                     location_facilities_attributes: [:name])
+    params..require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,
+                                      location_facilities_attributes: [:name])
   end
 
   def set_location
