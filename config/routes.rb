@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     # locations end points
     get '/locations', to: 'locations#index'
     post '/locations', to: 'locations#create'
-    post '/locations/nearme', to: 'locations#nearme'
+    get '/locations/nearme', to: 'locations#nearme'
     get '/locations/static_assests', to: 'locations#get_static_assests'
     get '/locations/:id', to: 'locations#show'
     put '/locations/:id', to: 'locations#update'
