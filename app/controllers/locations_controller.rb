@@ -1,24 +1,33 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
-  before_action :authenticate_user, except: %i[:index :nearme ]
+  before_action :authenticate_user, except: %i[index nearme]
   before_action :set_location, only: %i[show update destroy]
   # using the transform json method the locations are turned into a hash so that they can be checked to see if the user has favourited any of them before sending it back to React so that a icon can be rendered based on each entries boolean
   def index
+   if current_user
+    p current_user
+   end
     @locations = Location.all.includes(%i[location_type])
     res = @locations.map(&:transform_json)
-    res.map do |entry|
-      entry[:faved] = fave_check(entry[:id])
+    if current_user
+      res.map do |entry|
+        entry[:faved] = fave_check(entry[:id])
+      end
     end
-
     render json: res
   end
 
   def create
-    @location = Location.new(location_params)
+    
+    @location = Location.new
+    @location.name = location_params[:name]
+    @location.address = location_params[:address]
+    @location.description = location_params[:description]
+
     # it was easiest to send through the location name rather than send the id and over to react and use sql to find the location based on the id because of how the react form is implimented
 
-    @location.location_type = LocationType.find_by_name(params[:location_type_name])
+    @location.location_type = LocationType.find_by_name(location_params[:location_type_name])
     @location.save
 
     if @location.errors.any?
@@ -33,14 +42,15 @@ class LocationsController < ApplicationController
   end
 
   def show
+    p current_user
     render json: @location.transform_json
   end
 
   def update
+    
     # the users cant update or delete locations once they're posted, instead they can makea requst to the admin account and then that account can decide if the changes are legitimate
     @location.update(location_params) if current_user.is_admin
     if @location.errors.any?
-
       render json: @location.errors, status: :unprocessable_entity
     else
 
@@ -66,21 +76,21 @@ class LocationsController < ApplicationController
 
   # geocoder nearby locations feature
   def nearme
-  # nearby returns a location list which is then mapped through with the transform json method. if there are no entries is sends back an array 
+    # nearby returns a location list which is then mapped through with the transform json method. if there are no entries is sends back an array
     nearby = Location.all.near(location_params[:coords], location_params[:description], units: :km)
     render json: nearby.map(&:transform_json), status: 201
   end
 
   # since the transform json method turns the return into a hash here we can check the users favourites based on the out put of that method and then send it back to the react side with the favourite boolean
   def fave_check(id)
-    current_user&.favourites&.map do |fave|
+    current_user.favourites.map do |fave|
       fave.location_id == id
     end
   end
 
   # thisis how we load the necesarry information on the react side to create a location, the locationtype and facilities were static so this just made sense.
   def get_static_assests
-    
+
     types = LocationType.all
     facilities = Facility.all
     type_array = []
@@ -97,8 +107,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,coords:[],
-                                      location_facilities_attributes: [:name])
+    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,:id, coords: [],location_facilities_attributes: [:name])
   end
 
   def set_location
