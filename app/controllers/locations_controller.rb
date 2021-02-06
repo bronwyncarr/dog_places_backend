@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
-  before_action :authenticate_user, except: %i[index get_static_assests]
+  before_action :authenticate_user, except: %i[:index :nearme ]
   before_action :set_location, only: %i[show update destroy]
   # using the transform json method the locations are turned into a hash so that they can be checked to see if the user has favourited any of them before sending it back to React so that a icon can be rendered based on each entries boolean
   def index
@@ -66,8 +66,9 @@ class LocationsController < ApplicationController
 
   # geocoder nearby locations feature
   def nearme
-    nearby = Location.near(location_params[:address], location_params[:description], units: :km)
-    render json: nearby.transform_json, status: 201
+  # nearby returns a location list which is then mapped through with the transform json method. if there are no entries is sends back an array 
+    nearby = Location.all.near(location_params[:coords], location_params[:description], units: :km)
+    render json: nearby.map(&:transform_json), status: 201
   end
 
   # since the transform json method turns the return into a hash here we can check the users favourites based on the out put of that method and then send it back to the react side with the favourite boolean
@@ -79,6 +80,7 @@ class LocationsController < ApplicationController
 
   # thisis how we load the necesarry information on the react side to create a location, the locationtype and facilities were static so this just made sense.
   def get_static_assests
+    
     types = LocationType.all
     facilities = Facility.all
     type_array = []
@@ -95,7 +97,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params..require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,
+    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,coords:[],
                                       location_facilities_attributes: [:name])
   end
 

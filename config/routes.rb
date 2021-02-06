@@ -6,11 +6,11 @@ Rails.application.routes.draw do
     # locations end points
     get '/locations', to: 'locations#index'
     post '/locations', to: 'locations#create'
+    post '/locations/nearme', to: 'locations#nearme'
     get '/locations/static_assests', to: 'locations#get_static_assests'
     get '/locations/:id', to: 'locations#show'
     put '/locations/:id', to: 'locations#update'
     delete '/locations/:id', to: 'locations#destroy'
-    get '/locations/nearme', to: 'locations#nearme'
     # user sign up and authentication end points
     scope '/auth' do
       post 'user_token' => 'user_token#create'
