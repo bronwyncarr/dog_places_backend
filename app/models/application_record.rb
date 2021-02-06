@@ -11,8 +11,11 @@ class ApplicationRecord < ActiveRecord::Base
 
     facilities
   end
-
-  # Makes the JSON request easier to work with on the React side thisis called on the Location object before transmitting it to extract details relating to the location so instead of say having user come through as an niteger it comes through with the string
+ def image_check (loc)
+  byebug
+  loc.image.attached ? image : nil
+ end
+  # Makes the JSON request easier to work with on the React side this is called on the Location object before transmitting it to extract details relating to the location so instead of say having user come through as an integer it comes through with the string
   def transform_json
     facility_array = get_facilities(self)
     {
@@ -28,8 +31,8 @@ class ApplicationRecord < ActiveRecord::Base
       reviews: reviews,
       faved: false,
       location_facilities_attributes: facility_array,
-      google: Rails.application.credentials.dig(:google_maps, :api_key)
-       image_url: url_for(reviews.image)
+      google: Rails.application.credentials.dig(:google_maps, :api_key),
+       #image_url: url_for(image_check(reviews))
     }
   end
 end

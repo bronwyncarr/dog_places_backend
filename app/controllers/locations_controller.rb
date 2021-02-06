@@ -66,9 +66,7 @@ class LocationsController < ApplicationController
 
   # geocoder nearby locations feature
   def nearme
-    location = Geocoder.search(location_params[:address])
-    coords = location.first.coordinates
-    nearby = Location.near(coords, location_params[:description], units: :km)
+    nearby = Location.near(location_params[:address], location_params[:description], units: :km)
     render json: nearby.transform_json, status: 201
   end
 
