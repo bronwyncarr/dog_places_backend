@@ -29,7 +29,7 @@ class ApplicationRecord < ActiveRecord::Base
       faved: false,
       location_facilities_attributes: facility_array,
       google: Rails.application.credentials.dig(:google_maps, :api_key)
-      # image_url: url_for(self.image)
+       image_url: url_for(reviews.image)
     }
   end
 end
