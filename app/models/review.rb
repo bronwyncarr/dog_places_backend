@@ -8,6 +8,6 @@ class Review < ApplicationRecord
   validates :body, presence: true, allow_blank: false # needs to have some text input
   validates :rating, presence: true, allow_blank: false
   validates :rating, numericality: { greater_than: 0, less_than_or_equal_to: 5 }
-  # image for the review to bedisplayed on the show page
+  # image for the review to be displayed on the show page
   has_one_attached :image
 end

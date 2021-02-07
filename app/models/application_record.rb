@@ -16,16 +16,14 @@ class ApplicationRecord < ActiveRecord::Base
   
 
   def get_reviews 
-    {
+   {
       user: User.find_by_id(self.user_id).username,
       body: self.body,
       rating: self.rating,
-      image_url: image_check(self),
-
     }
   end
   
-
+  
   # Makes the JSON request easier to work with on the React side this is called on the Location object before transmitting it to extract details relating to the location so instead of say having user come through as an integer it comes through with the string
   
   def transform_json
@@ -40,7 +38,19 @@ class ApplicationRecord < ActiveRecord::Base
       latitude: latitude,
       posted: created_at,
       edited: updated_at,
-      reviews: reviews.map(&:get_reviews),
+      reviews: self.reviews.map(&:get_reviews),
+      # do |review|
+        
+      #   reviews = {
+      #     user: User.find_by_id(review.user.id).username,
+      #     body: review.body,
+      #     rating: review.rating,
+      #   }
+      #   # byebug
+      #   reviews[:image]= url_for(review.image) if review.image.attached?
+      #   byebug
+      #   reviews
+      # end,
       faved: false,
       location_facilities_attributes: facility_array,
       google: Rails.application.credentials.dig(:google_maps, :api_key)
