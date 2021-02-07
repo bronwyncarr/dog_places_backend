@@ -13,9 +13,7 @@ class ApplicationRecord < ActiveRecord::Base
     facilities
   end
 
-  def get_image_url
-    url_for(image)
-  end
+  
 
   def get_reviews 
     {

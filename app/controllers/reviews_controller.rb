@@ -17,7 +17,9 @@ class ReviewsController < ApplicationController
     # if @review.errors.any?
     render json: { notice: 'Favourite was added!' }, status: 201
   end
-
+  def get_image_url
+    url_for(image)
+  end
   def destroy
     @review.destroy
     render json: { notice: 'review was deleted' }, status: 204
