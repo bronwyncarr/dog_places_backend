@@ -7,7 +7,7 @@ class LocationsController < ApplicationController
   LocationReducer = Rack::Reducer.new(
     Location.all,
     ->(name:) { where('lower(name) like ?', "%#{name.downcase}%") },
-    ->(address:) { where('lower(address) like ?', "%#{address.downcase}%") },
+    # ->(address:) { where('lower(address) like ?', "%#{address.downcase}%") },
     # -> (location_type:) { joins(:location_types).merge(LocationType.where('location_types.name ILIKE ?', "%#{location_type.capitalize}%")) }
   )
   
