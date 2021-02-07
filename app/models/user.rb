@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Authentication
   has_secure_password
   # Validations
   validates :username, :email, presence: true, uniqueness: true
-  
+
   # Relationships
   has_many :reviews, dependent: :destroy
 

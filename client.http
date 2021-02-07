@@ -11,7 +11,7 @@ Content-Type: application/json
 
 {
     "user_id": 3,
-    "location_type_id":3,
+    "location_type_name":"Dog park",
     "name":"testarooni",
     "address": "123 fakestreet" ,
     "description":"A fun dogpark for all to come and play!"
@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### show location id 1
-GET http://localhost:3000/api/locations/1
+GET http://localhost:3000/api/locations/2
 
 ### unsuccessful location show
 GET http://localhost:3000/api/locations/100
@@ -86,7 +86,7 @@ Content-Type: application/json
 {
 "user":
 {
-    "email":"test@me.com",
+    "username":"testyboi",
     "password":"testme"
     
 }
@@ -104,4 +104,20 @@ Content-Type: application/json
     "password":"testme2"
     
 }
+}
+
+###testing location data method
+GET  http://localhost:3000/api/locations/static_assests
+Content-Type: application/json
+
+###testing New Review method notethis requires you to set the user manually in the review create method
+
+POST http://localhost:3000/api/locations/2/review/new/
+Content-Type: application/json
+Authorization: Bearer "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI0MjQ5MjIsInN1YiI6NH0.eyiHeKiKlyvPphYOnA63ZbGYiqQhf84oBtmmhNADAHw"
+
+{"review":
+   {"body":"textaroni",
+   "rating": "numberaroni",
+   "location_id":2}
 }
