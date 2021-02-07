@@ -20,6 +20,11 @@ class ReviewsController < ApplicationController
   def get_image_url
     url_for(image)
   end
+  def image_check(review)
+    if review.image.attached? 
+        return review.get_image_url
+     end
+  end
   def destroy
     @review.destroy
     render json: { notice: 'review was deleted' }, status: 204

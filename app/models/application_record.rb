@@ -24,11 +24,7 @@ class ApplicationRecord < ActiveRecord::Base
 
     }
   end
-  def image_check(review)
-    if review.image.attached? 
-        return review.get_image_url
-     end
-  end
+  
 
   # Makes the JSON request easier to work with on the React side this is called on the Location object before transmitting it to extract details relating to the location so instead of say having user come through as an integer it comes through with the string
   def transform_json
