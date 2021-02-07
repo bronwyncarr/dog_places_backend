@@ -23,7 +23,6 @@ class LocationsController < ApplicationController
   end
 
   def create
-    
     @location = Location.new
     @location.name = location_params[:name]
     @location.address = location_params[:address]
@@ -50,10 +49,9 @@ class LocationsController < ApplicationController
   end
 
   def update
-    
     # the users cant update or delete locations once they're posted, instead they can makea requst to the admin account and then that account can decide if the changes are legitimate
     if current_user.is_admin
-    @location.update(location_params) 
+      @location.update(location_params)
     elsif @location.errors.any?
       render json: @location.errors, status: :unprocessable_entity
     else
@@ -94,7 +92,6 @@ class LocationsController < ApplicationController
 
   # thisis how we load the necesarry information on the react side to create a location, the locationtype and facilities were static so this just made sense.
   def get_static_assests
-
     types = LocationType.all
     facilities = Facility.all
     type_array = []
@@ -111,7 +108,8 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,:id, coords: [],location_facilities_attributes: [:name])
+    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id,
+                                     :is_admin, :id, coords: [], location_facilities_attributes: [:name])
   end
 
   def set_location
