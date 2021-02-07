@@ -5,17 +5,17 @@ Rails.application.routes.draw do
   scope '/api' do
     # locations end points
     get '/locations/nearme', to: 'locations#nearme'
+    get '/locations/static_assests', to: 'locations#get_static_assests'   
+    resources :favourites
+    resources :reviews, only: %i[create destroy]
+    resources :locations,except: [:fave_check]
     # get '/locations', to: 'locations#index'
     # post '/locations', to: 'locations#create'
     # post '/new', to: 'favourites#create'
     # delete '/destroy', to: 'favourites#destroy'
-    # get '/favourites', to: 'favourites#index'
-    resources :favourites
-    resources :reviews, only: %i[create destroy]
     # post '/new', to: 'reviews#create'
     # post '/destroy/:id', to: 'reviews#destroy'
-    get '/locations/static_assests', to: 'locations#get_static_assests'   
-    resources :locations,except: [:fave_check]
+    # get '/favourites', to: 'favourites#index'
     # get '/locations/:id', to: 'locations#show'
     # put '/locations/:id', to: 'locations#update'
     # delete '/locations/:id', to: 'locations#destroy'
@@ -29,5 +29,6 @@ Rails.application.routes.draw do
     end
     # reviews end points
     # favorites end points
+
   end
 end

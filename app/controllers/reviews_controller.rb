@@ -13,7 +13,8 @@ class ReviewsController < ApplicationController
     @review.location_id = review_params[:location_id]
     @review.rating = review_params[:rating]
     @review.save
-    byebug if @review.errors.any?
+    
+    # if @review.errors.any?
     render json: { notice: 'Favourite was added!' }, status: 201
   end
 
