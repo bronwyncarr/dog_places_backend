@@ -37,7 +37,7 @@ class LocationsController < ApplicationController
       render json: @location.errors, status: :unprocessable_entity
     else
       # to avoid corrupt data the location facilities arent added if there is any error on the entry
-      params[:location_facilities_attributes].each do |facility|
+      location_params[:location_facilities_attributes].map do |facility|
         LocationFacility.create(location_id: @location.id, facility: Facility.find_by_name(facility))
       end
       render json: @location.transform_json, status: 201
@@ -50,8 +50,14 @@ class LocationsController < ApplicationController
 
   def update
     # the users cant update or delete locations once they're posted, instead they can makea requst to the admin account and then that account can decide if the changes are legitimate
+    
+    
+      
     if current_user.is_admin
-      @location.update(location_params)
+      @location.update({name:location_params[:name],location_type_id: LocationType.find_by_name(location_params[:location_type_name]).id,address:location_params[:address],description:location_params[:description]})
+     location_params[:location_facilities_attributes].map do |facility|
+        LocationFacility.create(location_id: @location.id, facility: Facility.find_by_name(facility))
+      end
     elsif @location.errors.any?
       render json: @location.errors, status: :unprocessable_entity
     else
@@ -109,7 +115,7 @@ class LocationsController < ApplicationController
 
   def location_params
     params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id,
-                                     :is_admin, :id, coords: [], location_facilities_attributes: [:name])
+                                     :is_admin, :id, coords: [], location_facilities_attributes: [])
   end
 
   def set_location
