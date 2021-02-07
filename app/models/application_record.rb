@@ -28,5 +28,5 @@ class ApplicationRecord < ActiveRecord::Base
 
   # Makes the JSON request easier to work with on the React side this is called on the Location object before transmitting it to extract details relating to the location so instead of say having user come through as an integer it comes through with the string
   
-  end
+
 end
