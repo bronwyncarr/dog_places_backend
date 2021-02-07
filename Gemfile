@@ -47,7 +47,6 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Authentication Gems
 gem 'jwt', '~> 1.5'
-gem 'knock', '~> 2.1'
 
 ## Geocoding gem
 gem 'geocoder', '~> 1.6'
@@ -61,3 +60,5 @@ gem 'rubocop', '~> 1.9'
 # aws
 
 gem 'aws-sdk-s3', '~> 1.88'
+
+gem "knock", "~> 2.1"

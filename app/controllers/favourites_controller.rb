@@ -10,7 +10,7 @@ class FavouritesController < ApplicationController
     @favourites = current_user.favourites.map do |fave|
       @faves_arr << Location.find_by_id(fave.location_id)
     end
-
+byebug
     render json: @faves_arr.map(&:transform_json), status: 201
   end
 

@@ -5,9 +5,10 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show update destroy]
   # using the transform json method the locations are turned into a hash so that they can be checked to see if the user has favourited any of them before sending it back to React so that a icon can be rendered based on each entries boolean
   def index
-   if current_user
-    p current_user
-   end
+    if current_user
+      p current_user
+    end
+    byebug
     @locations = Location.all.includes(%i[location_type])
     res = @locations.map(&:transform_json)
     if current_user
@@ -42,21 +43,21 @@ class LocationsController < ApplicationController
   end
 
   def show
-    p current_user
     render json: @location.transform_json
   end
 
   def update
     
     # the users cant update or delete locations once they're posted, instead they can makea requst to the admin account and then that account can decide if the changes are legitimate
-    @location.update(location_params) if current_user.is_admin
-    if @location.errors.any?
+    if current_user.is_admin
+    @location.update(location_params) 
+    elsif @location.errors.any?
       render json: @location.errors, status: :unprocessable_entity
     else
 
-      render json: @location.transform_json, status: 201
       # the email being sent to the admin
       LocationNotifierMailer.change_location_mailer(current_user, @location).deliver
+      render json: @location.transform_json, status: 201
 
     end
   end
