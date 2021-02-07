@@ -5,10 +5,6 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show update destroy]
   # using the transform json method the locations are turned into a hash so that they can be checked to see if the user has favourited any of them before sending it back to React so that a icon can be rendered based on each entries boolean
   def index
-    if current_user
-      p current_user
-    end
-    byebug
     @locations = Location.all.includes(%i[location_type])
     res = @locations.map(&:transform_json)
     if current_user
@@ -16,6 +12,7 @@ class LocationsController < ApplicationController
         entry[:faved] = fave_check(entry[:id])
       end
     end
+    
     render json: res
   end
 

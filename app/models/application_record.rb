@@ -19,9 +19,11 @@ class ApplicationRecord < ActiveRecord::Base
 
   def image_check(location)
     if location.reviews.any?
-      location.reviews.map do |review|
-        review.image.attached? ? review.get_image_url : nil
-      end
+      location.reviews.each do |review|
+        if review.image.attached? 
+          return review.get_image_url 
+        end 
+          end
 
     end
   end
