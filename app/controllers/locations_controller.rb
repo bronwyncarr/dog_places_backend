@@ -11,7 +11,6 @@ class LocationsController < ApplicationController
     # -> (location_type:) { joins(:location_types).merge(LocationType.where('location_types.name ILIKE ?', "%#{location_type.capitalize}%")) }
   )
   
-  
   def index
     @locations = LocationReducer.apply(params).includes(%i[location_type])
     res = @locations.map(&:transform_json)
