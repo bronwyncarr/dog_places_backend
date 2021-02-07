@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
-  before_action :authenticate_user, except: %i[index nearme]
+  before_action :authenticate_user, except: %i[index nearme get_static_assests]
   before_action :set_location, only: %i[show update destroy]
   # using the transform json method the locations are turned into a hash so that they can be checked to see if the user has favourited any of them before sending it back to React so that a icon can be rendered based on each entries boolean
   def index

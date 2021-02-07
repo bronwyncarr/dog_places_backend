@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   scope '/api' do
     # locations end points
     get '/locations/nearme', to: 'locations#nearme'
-    get '/locations/static_assests', to: 'locations#get_static_assests'   
+    get 'static_assests', to: 'locations#get_static_assests'   
     resources :favourites
     resources :reviews, only: %i[create destroy]
     resources :locations,except: [:fave_check]
