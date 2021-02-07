@@ -4,7 +4,7 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  Rails.application.routes.default_url_options = { host: 'arn:aws:s3:ap-southeast-2:507489205394:accesspoint/offtheleashimages' }
+  Rails.application.routes.default_url_options = { host: 'https://offtheleash.s3.ap-southeast-2.amazonaws.com/' }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
