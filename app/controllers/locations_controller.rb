@@ -4,15 +4,21 @@ class LocationsController < ApplicationController
   before_action :authenticate_user, except: %i[index nearme get_static_assests]
   before_action :set_location, only: %i[show update destroy]
   # using the transform json method the locations are turned into a hash so that they can be checked to see if the user has favourited any of them before sending it back to React so that a icon can be rendered based on each entries boolean
+  LocationReducer = Rack::Reducer.new(
+    Location.all,
+    ->(name:) { where('lower(name) like ?', "%#{name.downcase}%") },
+    # ->(address:) { where('lower(address) like ?', "%#{address.downcase}%") },
+    # -> (location_type:) { joins(:location_types).merge(LocationType.where('location_types.name ILIKE ?', "%#{location_type.capitalize}%")) }
+  )
+  
   def index
-    @locations = Location.all.includes(%i[location_type])
+    @locations = LocationReducer.apply(params).includes(%i[location_type])
     res = @locations.map(&:transform_json)
     if current_user
       res.map do |entry|
         entry[:faved] = fave_check(entry[:id])
       end
     end
-  
     render json: res
   end
 
