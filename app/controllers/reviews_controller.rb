@@ -22,11 +22,10 @@ class ReviewsController < ApplicationController
   end
 
   def index
+    
     location = Location.find(params[:location_id])
-  rescue StandardError
-    render json: { error: 'Location not found' }, status: 404
-
-    reviews = location.reviews.map do |review|
+  
+    @reviews = location.reviews.map do |review|
       entries = {
         id: review.id,
         user: User.find_by_id(review.user.id).username,
@@ -36,7 +35,7 @@ class ReviewsController < ApplicationController
       entries[:image_url] = url_for(review.image) if review.image.attached?
       entries
     end
-    render json: reviews
+    render json: @reviews
   end
 
   def destroy
