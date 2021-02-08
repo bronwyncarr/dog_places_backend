@@ -39,7 +39,7 @@ class ApplicationRecord < ActiveRecord::Base
       posted: created_at,
       edited: updated_at,
       reviews: self.reviews.map(&:get_reviews),
-      # do |review|
+      # .map do |review|
         
       #   reviews = {
       #     user: User.find_by_id(review.user.id).username,

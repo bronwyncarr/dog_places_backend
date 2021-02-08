@@ -19,6 +19,7 @@ class LocationsController < ApplicationController
         entry[:faved] = fave_check(entry[:id])
       end
     end
+    
     render json: res
   end
 

@@ -2,7 +2,7 @@
 
 class ReviewsController < ApplicationController
   # before_action :authenticate_user
-  before_action :set_location, only: %i[show]
+  #before_action :set_location, only: %i[index]
   before_action :set_review, only: :destroy
   def create
     # finds the location to attach the review to and creates the new review then assigns the review to the logged in user and attaches a imageif the user uploaded one
@@ -21,9 +21,12 @@ class ReviewsController < ApplicationController
       render json: { notice: 'Review was added!' }, status: 201
     end
   end
-
-  def show
-    reviews = @location.reviews.map do |review|
+ReviewReducer = Rack::Reducer.new(  
+  Location.all,->(location_id:){where(id: location_id)}
+)
+  def index
+    location = ReviewReducer.apply(params).first
+        reviews = location.reviews.map do |review|
       entries = {
         id: review.id,
         user: User.find_by_id(review.user.id).username,

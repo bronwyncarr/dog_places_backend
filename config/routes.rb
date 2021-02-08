@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get '/locations/nearme', to: 'locations#nearme'
     get 'static_assests', to: 'locations#get_static_assests'   
     resources :favourites
-    resources :reviews, only: %i[create destroy show]
+    resources :reviews, only: %i[create destroy index]
     resources :locations,except: [:fave_check]
     scope '/auth' do
       post '/sign_up', to: 'users#create'
