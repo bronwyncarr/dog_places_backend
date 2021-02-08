@@ -87,7 +87,7 @@ class LocationsController < ApplicationController
     # nearby returns a location list which is then mapped through with the transform json method. if there are no entries is sends back an array
    
     nearby = Location.all.where.not(latitude: nil).near([params[:lat], params[:lng]],
-                                                        params[:description], units: :km)
+                                                        params[:distance], units: :km)
     render json: nearby.map(&:transform_json), status: 201
   end
 
@@ -116,7 +116,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id,
+    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id,:distance,
                                      :is_admin, :id, :lat, :lng, location_facilities_attributes: [])
   end
 
