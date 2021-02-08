@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FavouritesController < ApplicationController
-  before_action :authenticate_user
+   before_action :authenticate_user
   before_action :set_favourite, only: :destroy
 
   # here we needed to find the favourite then put all the favourite in an array so we could use the transform_json method and have a standard return

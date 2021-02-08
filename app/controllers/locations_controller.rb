@@ -5,7 +5,7 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show update destroy]
   # using the transform json method the locations are turned into a hash so that they can be checked to see if the user has favourited any of them before sending it back to React so that a icon can be rendered based on each entries boolean
   LocationReducer = Rack::Reducer.new(
-    Location.all,
+    Location.all.includes([:location_facilities]),
     ->(name:) { where('lower(name) like ?', "%#{name.downcase}%") }
     # ->(address:) { where('lower(address) like ?', "%#{address.downcase}%") },
     # -> (location_type:) { joins(:location_types).merge(LocationType.where('location_types.name ILIKE ?', "%#{location_type.capitalize}%")) }
@@ -85,8 +85,9 @@ class LocationsController < ApplicationController
   # geocoder nearby locations feature
   def nearme
     # nearby returns a location list which is then mapped through with the transform json method. if there are no entries is sends back an array
-    nearby = Location.all.where.not(latitude: nil).near([location_params[:lat], location_params[:lng]],
-                                                        location_params[:description], units: :km)
+   
+    nearby = Location.all.where.not(latitude: nil).near([params[:lat], params[:lng]],
+                                                        params[:description], units: :km)
     render json: nearby.map(&:transform_json), status: 201
   end
 
