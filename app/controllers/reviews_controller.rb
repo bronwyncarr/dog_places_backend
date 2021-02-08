@@ -2,10 +2,9 @@
 
 class ReviewsController < ApplicationController
   # before_action :authenticate_user
-  #before_action :set_location, only: %i[index]
   before_action :set_review, only: :destroy
   def create
-    # finds the location to attach the review to and creates the new review then assigns the review to the logged in user and attaches a imageif the user uploaded one
+    # finds the location to attach the review to and creates the new review then assigns the review to the logged in user and attaches a image if the user uploaded one
 
     @review = Review.new
     @review.user_id = current_user.id
@@ -21,12 +20,13 @@ class ReviewsController < ApplicationController
       render json: { notice: 'Review was added!' }, status: 201
     end
   end
-ReviewReducer = Rack::Reducer.new(  
-  Location.all,->(location_id:){where(id: location_id)}
-)
+
   def index
-    location = ReviewReducer.apply(params).first
-        reviews = location.reviews.map do |review|
+    location = Location.find(params[:location_id])
+  rescue StandardError
+    render json: { error: 'Location not found' }, status: 404
+
+    reviews = location.reviews.map do |review|
       entries = {
         id: review.id,
         user: User.find_by_id(review.user.id).username,
@@ -53,13 +53,6 @@ ReviewReducer = Rack::Reducer.new(
   def set_review
     @review = Review.find(params[:id])
   rescue StandardError
-    render json: { error: 'Location not found' }, status: 404
-  
-  end
-
-  def set_location
-    @location = Location.find(params[:id])
-  rescue StandardError
-    render json: { error: 'Location not found' }, status: 404
+    render json: { error: 'Review not found' }, status: 404
   end
 end
