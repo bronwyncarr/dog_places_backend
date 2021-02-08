@@ -21,16 +21,137 @@
           null
         ]
       },
+      "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/review.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/application_record.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/location.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
       "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/location_type.rb": {
         "lines": [
           null,
           null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/location_facility.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
       },
       "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/favourite.rb": {
         "lines": [
@@ -48,104 +169,6 @@
         "branches": {
         }
       },
-      "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/location_facility.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/application_record.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/review.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
       "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/facility.rb": {
         "lines": [
           null,
@@ -155,39 +178,6 @@
           0,
           null,
           null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/rodney/Desktop/JavaScript/React/OffTheLeash/dog_places_backend/app/models/location.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
           0,
           0,
           0
@@ -564,6 +554,7 @@
           null,
           0,
           null,
+          null,
           0,
           0,
           0,
@@ -633,6 +624,6 @@
         }
       }
     },
-    "timestamp": 1612755285
+    "timestamp": 1612768952
   }
 }
