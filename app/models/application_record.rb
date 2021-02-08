@@ -39,18 +39,6 @@ class ApplicationRecord < ActiveRecord::Base
       posted: created_at,
       edited: updated_at,
       reviews: self.reviews.map(&:get_reviews),
-      # .map do |review|
-        
-      #   reviews = {
-      #     user: User.find_by_id(review.user.id).username,
-      #     body: review.body,
-      #     rating: review.rating,
-      #   }
-      #   # byebug
-      #   reviews[:image]= url_for(review.image) if review.image.attached?
-      #   byebug
-      #   reviews
-      # end,
       faved: false,
       location_facilities_attributes: facility_array,
       google: Rails.application.credentials.dig(:google_maps, :api_key)
