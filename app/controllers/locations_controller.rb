@@ -4,20 +4,26 @@ class LocationsController < ApplicationController
   before_action :authenticate_user, except: %i[index nearme get_static_assests]
   before_action :set_location, only: %i[show update destroy]
   # using the transform json method the locations are turned into a hash so that they can be checked to see if the user has favourited any of them before sending it back to React so that a icon can be rendered based on each entries boolean
+  LocationReducer = Rack::Reducer.new(
+    Location.all,
+    ->(name:) { where('lower(name) like ?', "%#{name.downcase}%") }
+    # ->(address:) { where('lower(address) like ?', "%#{address.downcase}%") },
+    # -> (location_type:) { joins(:location_types).merge(LocationType.where('location_types.name ILIKE ?', "%#{location_type.capitalize}%")) }
+  )
+
   def index
-    @locations = Location.all.includes(%i[location_type])
+    @locations = LocationReducer.apply(params).includes(%i[location_type])
     res = @locations.map(&:transform_json)
     if current_user
       res.map do |entry|
         entry[:faved] = fave_check(entry[:id])
       end
     end
-  
+
     render json: res
   end
 
   def create
-    
     @location = Location.new
     @location.name = location_params[:name]
     @location.address = location_params[:address]
@@ -32,7 +38,7 @@ class LocationsController < ApplicationController
       render json: @location.errors, status: :unprocessable_entity
     else
       # to avoid corrupt data the location facilities arent added if there is any error on the entry
-      params[:location_facilities_attributes].each do |facility|
+      location_params[:location_facilities_attributes].map do |facility|
         LocationFacility.create(location_id: @location.id, facility: Facility.find_by_name(facility))
       end
       render json: @location.transform_json, status: 201
@@ -44,10 +50,14 @@ class LocationsController < ApplicationController
   end
 
   def update
-    
     # the users cant update or delete locations once they're posted, instead they can makea requst to the admin account and then that account can decide if the changes are legitimate
+
     if current_user.is_admin
-    @location.update(location_params) 
+      @location.update({ name: location_params[:name],
+                         location_type_id: LocationType.find_by_name(location_params[:location_type_name]).id, address: location_params[:address], description: location_params[:description] })
+      location_params[:location_facilities_attributes].map do |facility|
+        LocationFacility.create(location_id: @location.id, facility: Facility.find_by_name(facility))
+      end
     elsif @location.errors.any?
       render json: @location.errors, status: :unprocessable_entity
     else
@@ -75,7 +85,8 @@ class LocationsController < ApplicationController
   # geocoder nearby locations feature
   def nearme
     # nearby returns a location list which is then mapped through with the transform json method. if there are no entries is sends back an array
-    nearby = Location.all.near(location_params[:coords], location_params[:description], units: :km)
+    nearby = Location.all.where.not(latitude: nil).near([location_params[:lat], location_params[:lng]],
+                                                        location_params[:description], units: :km)
     render json: nearby.map(&:transform_json), status: 201
   end
 
@@ -88,7 +99,6 @@ class LocationsController < ApplicationController
 
   # thisis how we load the necesarry information on the react side to create a location, the locationtype and facilities were static so this just made sense.
   def get_static_assests
-
     types = LocationType.all
     facilities = Facility.all
     type_array = []
@@ -105,7 +115,8 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :is_admin,:id, coords: [],location_facilities_attributes: [:name])
+    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id,
+                                     :is_admin, :id, :lat, :lng, location_facilities_attributes: [])
   end
 
   def set_location

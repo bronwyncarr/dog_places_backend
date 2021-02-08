@@ -3,7 +3,7 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
-  Rails.application.routes.default_url_options = { host: "http://localhost:3000" }
+  # Rails.application.routes.default_url_options = { host: "http://localhost:3000" }
   config.after_initialize do
     Bullet.enable        = true
     Bullet.alert         = true

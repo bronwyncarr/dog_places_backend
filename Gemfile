@@ -58,7 +58,9 @@ gem 'bullet', '~> 6.1'
 
 gem 'rubocop', '~> 1.9'
 # aws
-
 gem 'aws-sdk-s3', '~> 1.88'
 
 gem "knock", "~> 2.1"
+
+
+gem 'rack-reducer', require: 'rack/reducer'
