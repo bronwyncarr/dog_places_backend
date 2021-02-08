@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReviewsController < ApplicationController
-  # before_action :authenticate_user
+   before_action :authenticate_user
   before_action :set_review, only: :destroy
   def create
     # finds the location to attach the review to and creates the new review then assigns the review to the logged in user and attaches a image if the user uploaded one
