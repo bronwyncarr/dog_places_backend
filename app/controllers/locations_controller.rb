@@ -13,11 +13,7 @@ class LocationsController < ApplicationController
   def index
     @locations = LocationReducer.apply(params).includes(%i[location_type])
     res = @locations.map(&:transform_json)
-    # if current_user
-    #   res.map do |entry|
-    #     entry[:faved] = fave_check(entry[:id])
-    #   end
-    # end
+    
 
     render json: res
   end
@@ -92,14 +88,9 @@ class LocationsController < ApplicationController
     render json: nearby.map(&:transform_json), status: 201
   end
 
-  # since the transform json method turns the return into a hash here we can check the users favourites based on the out put of that method and then send it back to the react side with the favourite boolean
-  # def fave_check(id)
-  #   current_user.favourites.map do |fave|
-  #     fave.location_id == id
-  #   end
-  # end
 
-  # thisis how we load the necesarry information on the react side to create a location, the locationtype and facilities were static so this just made sense.
+
+  # this is how we load the necesarry information on the react side to create a location, the locationtype and facilities were static so this just made sense.
   def get_static_assests
     types = LocationType.all
     facilities = Facility.all

@@ -35,7 +35,7 @@ if LocationType.count.zero?
 else
   puts 'Location type database already seeded'
 end
-# Location.create(user:User.first,facility:Facility.first,location_type:LocationType.first,name:'test dog park',address:'655 Westernport Hwy',latitude:'-38.155520',longitude:'145.224080')
+
 
 Location.create(location_type_id: 1, name: 'test dog park', address: '655 Westernport Hwy',
                 description: 'A fun dogpark for all to come and play!')
@@ -52,4 +52,4 @@ LocationFacility.create(facility_id: 2, location_id: 1)
 LocationFacility.create(facility_id: 2, location_id: 2)
 LocationFacility.create(facility_id: 3, location_id: 3)
 Review.create(location_id: 1, user_id: 2, body: 'testing this out', rating: 4)
-Review.create(location_id: 2, user_id: 1, body: 'testing this out againn', rating: 2)
+Review.create(location_id: 2, user_id: 1, body: 'testing this out again', rating: 2)

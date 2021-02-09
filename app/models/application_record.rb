@@ -36,7 +36,6 @@ class ApplicationRecord < ActiveRecord::Base
       posted: created_at,
       edited: updated_at,
       reviews: reviews.map(&:get_reviews),
-      # faved: false,
       location_facilities_attributes: facility_array,
       google: Rails.application.credentials.dig(:google_maps, :api_key)
 
