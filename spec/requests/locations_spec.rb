@@ -17,14 +17,13 @@ RSpec.describe LocationsController, type: :request do
       end
 
       it 'routes to #create' do
-        expect(post location_path).to route_to('locations#create')
+        expect(post(location_path)).to route_to('locations#create')
       end
 
       it 'routes to #update via PUT' do
         expect(put: '/api/locations/1').to route_to('locations#update', id: '1')
       end
 
-     
       it 'routes to #delete via delete' do
         expect(delete: '/api/locations/1').to route_to('locations#destroy', id: '1')
       end
@@ -52,7 +51,7 @@ RSpec.describe LocationsController, type: :request do
         end
         it 'error contains the correct error message' do
           expect(@json_response['errors'].first).to eq("Name can't be blank")
-      end
+        end
       end
       context 'PUT Locations#update' do
         before(:example) do

@@ -7,18 +7,17 @@ class LocationsController < ApplicationController
   LocationReducer = Rack::Reducer.new(
     Location.all.includes([:location_facilities]),
     ->(name:) { where('lower(name) like ?', "%#{name.downcase}%") }
-    # ->(address:) { where('lower(address) like ?', "%#{address.downcase}%") },
-    # -> (location_type:) { joins(:location_types).merge(LocationType.where('location_types.name ILIKE ?', "%#{location_type.capitalize}%")) }
+    
   )
 
   def index
     @locations = LocationReducer.apply(params).includes(%i[location_type])
     res = @locations.map(&:transform_json)
-    if current_user
-      res.map do |entry|
-        entry[:faved] = fave_check(entry[:id])
-      end
-    end
+    # if current_user
+    #   res.map do |entry|
+    #     entry[:faved] = fave_check(entry[:id])
+    #   end
+    # end
 
     render json: res
   end
@@ -53,6 +52,8 @@ class LocationsController < ApplicationController
     # the users cant update or delete locations once they're posted, instead they can makea requst to the admin account and then that account can decide if the changes are legitimate
 
     if current_user.is_admin
+      @location.facilities.destroy_all
+      
       @location.update({ name: location_params[:name],
                          location_type_id: LocationType.find_by_name(location_params[:location_type_name]).id, address: location_params[:address], description: location_params[:description] })
       location_params[:location_facilities_attributes].map do |facility|
@@ -85,18 +86,18 @@ class LocationsController < ApplicationController
   # geocoder nearby locations feature
   def nearme
     # nearby returns a location list which is then mapped through with the transform json method. if there are no entries is sends back an array
-   
+
     nearby = Location.all.where.not(latitude: nil).near([params[:lat], params[:lng]],
                                                         params[:distance], units: :km)
     render json: nearby.map(&:transform_json), status: 201
   end
 
   # since the transform json method turns the return into a hash here we can check the users favourites based on the out put of that method and then send it back to the react side with the favourite boolean
-  def fave_check(id)
-    current_user.favourites.map do |fave|
-      fave.location_id == id
-    end
-  end
+  # def fave_check(id)
+  #   current_user.favourites.map do |fave|
+  #     fave.location_id == id
+  #   end
+  # end
 
   # thisis how we load the necesarry information on the react side to create a location, the locationtype and facilities were static so this just made sense.
   def get_static_assests
@@ -116,7 +117,7 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id,:distance,
+    params.require(:location).permit(:location_type_name, :name, :address, :file, :description, :location_type_id, :distance,
                                      :is_admin, :id, :lat, :lng, location_facilities_attributes: [])
   end
 

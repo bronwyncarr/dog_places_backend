@@ -106,13 +106,13 @@ Content-Type: application/json
 }
 }
 
-###testing location data method
+### testing location data method
 GET  http://localhost:3000/api/locations/static_assests
 Content-Type: application/json
 
-###testing New Review method notethis requires you to set the user manually in the review create method
+### testing New Review method note this requires you to set the user manually in the review create method
 
-POST http://localhost:3000/api/locations/2/review/new/
+POST http://localhost:3000/api/reviews/new/
 Content-Type: application/json
 Authorization: Bearer "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTI0MjQ5MjIsInN1YiI6NH0.eyiHeKiKlyvPphYOnA63ZbGYiqQhf84oBtmmhNADAHw"
 

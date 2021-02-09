@@ -13,19 +13,16 @@ class ApplicationRecord < ActiveRecord::Base
     facilities
   end
 
-  
-
-  def get_reviews 
-   {
-      user: User.find_by_id(self.user_id).username,
-      body: self.body,
-      rating: self.rating,
+  def get_reviews
+    {
+      user: User.find_by_id(user_id).username,
+      body: body,
+      rating: rating
     }
   end
-  
-  
+
   # Makes the JSON request easier to work with on the React side this is called on the Location object before transmitting it to extract details relating to the location so instead of say having user come through as an integer it comes through with the string
-  
+
   def transform_json
     facility_array = get_facilities(self)
     {
@@ -38,11 +35,11 @@ class ApplicationRecord < ActiveRecord::Base
       latitude: latitude,
       posted: created_at,
       edited: updated_at,
-      reviews: self.reviews.map(&:get_reviews),
-      faved: false,
+      reviews: reviews.map(&:get_reviews),
+      # faved: false,
       location_facilities_attributes: facility_array,
       google: Rails.application.credentials.dig(:google_maps, :api_key)
-      
+
     }
   end
 end
