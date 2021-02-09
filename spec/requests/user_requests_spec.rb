@@ -26,4 +26,8 @@ RSpec.describe UsersController, type: :request do
       end
     end
   end
+  context 'invalid users' do
+    before(:example) do
+    end
+  end
 end

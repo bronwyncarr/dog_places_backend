@@ -47,20 +47,19 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Authentication Gems
 gem 'jwt', '~> 1.5'
+gem 'knock', '~> 2.1'
 
 ## Geocoding gem
 gem 'geocoder', '~> 1.6'
 
 ## Sendgrid mailer gem
 gem 'sendgrid-ruby', '~> 6.3'
-
+#  bullet for optimising DB queries
 gem 'bullet', '~> 6.1'
-
+# Rubocop for linting
 gem 'rubocop', '~> 1.9'
 # aws
 gem 'aws-sdk-s3', '~> 1.88'
-
-gem "knock", "~> 2.1"
 
 
 gem 'rack-reducer', require: 'rack/reducer'

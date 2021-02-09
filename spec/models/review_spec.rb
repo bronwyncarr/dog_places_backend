@@ -18,4 +18,15 @@ RSpec.describe Review, type: :model do
       end
     end
   end
+  context 'review attaches to a location' do
+    before(:example) do
+      @location = FactoryBot.create(:location)
+      @review = FactoryBot.create(:review)
+      @review.location_id = @location.id
+      @review.save
+      it('attaches to a location') do
+        expect(@review.location_id).to eq(@location.id)
+      end
+    end
+  end
 end

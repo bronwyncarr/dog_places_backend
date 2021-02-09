@@ -4,7 +4,8 @@ class FavouritesController < ApplicationController
   before_action :authenticate_user
   before_action :set_favourite, only: :destroy
 
-  # here we needed to find the favourite then put all the favourite in an array so we could use the transform_json method and have a standard return
+  # here we needed to find the favourite then put all the favourite in an array so we could use the transform_json method 
+  # and have a standard return
   def index
     @faves_arr = []
     @favourites = current_user.favourites.map do |fave|
@@ -30,7 +31,6 @@ class FavouritesController < ApplicationController
   private
 
   def set_favourite
-    # Something is not right here I suspect :(
     @favourite = current_user.favourites.find_by_location_id(favourite_params[:location_id])
   rescue StandardError
     render json: { error: 'favourite not found' }, status: 404

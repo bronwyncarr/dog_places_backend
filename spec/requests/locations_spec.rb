@@ -17,21 +17,20 @@ RSpec.describe LocationsController, type: :request do
       end
 
       it 'routes to #create' do
-        expect(post location_path).to route_to('locations#create')
+        expect(post(location_path)).to route_to('locations#create')
       end
 
       it 'routes to #update via PUT' do
         expect(put: '/api/locations/1').to route_to('locations#update', id: '1')
       end
 
-     
       it 'routes to #delete via delete' do
         expect(delete: '/api/locations/1').to route_to('locations#destroy', id: '1')
       end
       describe 'POST Locations#create' do
         context 'when the location is valid' do
           before(:example) do
-            @location_params = FactoryBot.attributes_for(:location)
+            location_params = FactoryBot.attributes_for(:location)
             post locations_path, params: { location: location_params }, headers: authenticated_header
           end
           it 'returns a http status 201'
@@ -49,6 +48,9 @@ RSpec.describe LocationsController, type: :request do
         end
         it 'should return unprocessable entity' do
           expect(response).to have_http_status(:unprocessable_entity)
+        end
+        it 'error contains the correct error message' do
+          expect(@json_response['errors'].first).to eq("Name can't be blank")
         end
       end
       context 'PUT Locations#update' do
